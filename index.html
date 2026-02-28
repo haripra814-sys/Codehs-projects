@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vaishanvi's Grocery World</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body { background:#f7f7f7; }
+    .card img { height:150px; object-fit:contain; }
+    .cart-box { position: fixed; right: 20px; top: 80px; width: 300px; }
+  </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container">
+    <span class="navbar-brand">🛒 Grocery World</span>
+    <button class="btn btn-success" onclick="showProducts()">Enter Store</button>
+  </div>
+</nav>
+
+<!-- Landing Section -->
+<div class="container text-center mt-5" id="landing">
+  <h1>Welcome to Vaishanvi's Grocery World</h1>
+  <p class="lead">Fresh groceries delivered to your door</p>
+  <button class="btn btn-success btn-lg mt-3" onclick="showProducts()">Shop Now</button>
+</div>
+
+<!-- Products Section -->
+<div class="container mt-4 d-none" id="store">
+  <h2 class="text-center mb-4">Our Products</h2>
+  <div class="row" id="productList"></div>
+</div>
+
+<!-- Cart -->
+<div class="cart-box">
+  <div class="card shadow">
+    <div class="card-body">
+      <h5>🧺 Cart</h5>
+      <ul id="cartItems" class="list-group mb-2"></ul>
+      <h6>Total: ₹<span id="total">0</span></h6>
+      <button class="btn btn-danger btn-sm w-100" onclick="clearCart()">Clear Cart</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const products = [
+  { name: "Apple", price: 120, image: "https://static.vecteezy.com/system/resources/previews/055/195/201/large_2x/fresh-apple-high-resolution-detail-photo.jpg" },
+  { name: "Banana", price: 60, image: "https://m.media-amazon.com/images/I/51ebZJ+DR4L.jpg" },
+  { name: "Milk", price: 50, image: "https://vethaa.in/wp-content/uploads/2025/07/natural-milk-1l.jpg" },
+  { name: "Bread", price: 40, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0rv_WYWixSRRSfTKvNgYiqfmxaeqQfFf4bg&s" },
+  { name: "Rice", price: 80, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbbHMLbVwAUDT7B-oqUxYbrZguIHbIckk3yQ&s" },
+  { name: "Eggs", price: 70, image: "https://www.licious.in/blog/wp-content/uploads/2022/01/eggs-1.jpg" }
+];
+
+let cart = [];
+let total = 0;
+
+// Show Store
+function showProducts() {
+  document.getElementById("landing").classList.add("d-none");
+  document.getElementById("store").classList.remove("d-none");
+}
+
+// Display Products
+const productList = document.getElementById("productList");
+
+products.forEach((product, index) => {
+  productList.innerHTML += `
+    <div class="col-md-4 col-lg-3 mb-4">
+      <div class="card text-center shadow-sm">
+        <img src="${product.image}" class="card-img-top p-3">
+        <div class="card-body">
+          <h5>${product.name}</h5>
+          <p>₹${product.price}</p>
+          <button class="btn btn-success btn-sm" onclick="addToCart(${index})">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+});
+
+// Add to Cart
+function addToCart(index) {
+  const product = products[index];
+  cart.push(product);
+  total += product.price;
+  updateCart();
+}
+
+// Update Cart UI
+function updateCart() {
+  const cartItems = document.getElementById("cartItems");
+  cartItems.innerHTML = "";
+
+  cart.forEach(item => {
+    cartItems.innerHTML += `
+      <li class="list-group-item d-flex justify-content-between">
+        ${item.name}
+        <span>₹${item.price}</span>
+      </li>
+    `;
+  });
+
+  document.getElementById("total").innerText = total;
+}
+
+// Clear Cart
+function clearCart() {
+  cart = [];
+  total = 0;
+  updateCart();
+}
+</script>
+
+</body>
+</html>
