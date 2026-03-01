@@ -1,0 +1,131 @@
+<script src="https://unpkg.com/regl@latest/dist/regl.js"></script>
+<script src="https://unpkg.com/gl-matrix@2.6.1/dist/gl-matrix-min.js"></script>
+
+// This is Javascript
+
+createREGL({
+  extensions: ['angle_instanced_arrays'],  
+  onDone: function (err, regl) {
+    if (err) return console.error(err);
+    
+    var view = mat4.create();
+    var projection = mat4.create();
+    var projectionView = mat4.create();
+
+    var drawLines = regl({
+      vert: `
+        precision highp float;
+        uniform mat4 uProjectionView;
+        uniform float uLineWidth, uAspect;
+        attribute vec3 aPoint, aNextPoint, aColor, aNextColor;
+        attribute vec2 aLinePosition;
+        varying vec3 vColor;
+
+        // From screen-projected-lines: http://github.com/substack/screen-projected-lines
+        vec2 lineNormal (vec4 p, vec4 n, float aspect) { 
+          return normalize((p.yx / p.w  - n.yx / n.w) * vec2(1, aspect)) * vec2(-1.0 / aspect, 1);
+        }
+
+        void main () {
+          // Compute the screen-space position of this point and the next
+          vec4 p = uProjectionView * vec4(aPoint, 1);
+          vec4 n = uProjectionView * vec4(aNextPoint, 1);
+
+          // Select one or the other positions
+          gl_Position = mix(p, n, aLinePosition.y);
+          
+          // Apply the screen-space offset
+          gl_Position.xy += lineNormal(p, n, uAspect) * aLinePosition.x * uLineWidth * gl_Position.w;
+
+          // Can use other attributes in the same manner
+          vColor = mix(aColor, aNextColor, aLinePosition.y);
+        }
+      `,
+      frag: `
+        precision mediump float;
+        varying vec3 vColor;
+        void main () {
+          gl_FragColor = vec4(0.5 + 0.5 * vColor, 1);
+        }
+      `,
+      attributes: {
+        // Pass the same data twice, one for the current point and one with an offset
+        // so that you get the next point (assuming float32) without duplicating the
+        // whole array
+        aPoint: {buffer: regl.prop('points'), divisor: 1},
+        aNextPoint: {buffer: regl.prop('points'), divisor: 1, offset: 12},
+        
+        // Can accept other attributes like color. Just have to apply analogous striding
+        aColor: {buffer: regl.prop('colors'), divisor: 1},
+        aNextColor: {buffer: regl.prop('colors'), divisor: 1, offset: 12},
+        
+        // Offsets for each triangle vertex along the normal and tangent
+        // First component is normal (+/- 1), second component is current point (0) vs next (1)
+        aLinePosition: [
+          -1, 0,
+          1, 0,
+          -1, 1,
+          1, 1
+        ],
+      },
+      uniforms: {
+        // Apply some scaling so that the width doesn't change with screen size
+        // or pixel ratio
+        uLineWidth: (ctx, props) => props.lineWidth / ctx.framebufferHeight * ctx.pixelRatio,
+        uAspect: ctx => ctx.framebufferWidth / ctx.framebufferHeight,
+      },
+      primitive: 'triangle strip',
+      // Each segment is *between* two points so if there are n points, there
+      // are n - 1 segments connecting them.
+      instances: (ctx, props) => props.count - 1,
+      count: 4,
+    });
+    
+    // A simple perspective camera that moves around a bit so we can test the
+    // width for different distances from the camera.
+    var camera = regl({
+      uniforms: {
+        uProjectionView: ctx => {
+          var t = ctx.time;
+          var r = 10 + 8 * Math.cos(t);
+          mat4.lookAt(view, [r * Math.cos(t), 1, r * Math.sin(t)], [0, 0, 0], [0, 1, 0]);
+          mat4.perspective(projection, Math.PI / 4, ctx.framebufferWidth / ctx.framebufferHeight, 0.5, 30);
+          return mat4.multiply(projectionView, projection, view);
+        },
+      }
+    });
+    
+    // An array of arrays of [x, y, z] coordinates. A normalized lissajous sort of curve, I think.
+    var n = 2000;
+    var pointBuffer = regl.buffer(new Array(n).fill(0).map((d, i) => vec3.normalize([], [
+      Math.cos(2 * Math.PI * 8 * i / (n - 1)),
+      Math.sin(2 * Math.PI * 12 * i / (n - 1)),
+      Math.cos(2 * Math.PI * 23 * i / (n - 1)),
+    ])));
+    
+    // No reason we can't add other attributes
+    var colorBuffer = regl.buffer(new Array(n).fill(0).map((d, i) => vec3.normalize([], [
+      Math.cos(2 * Math.PI * 8 * i / (n - 1)),
+      Math.sin(2 * Math.PI * 12 * i / (n - 1)),
+      Math.cos(2 * Math.PI * 23 * i / (n - 1)),
+    ])));
+    
+    regl.frame(({tick}) => {
+      camera(() => {
+        regl.clear({color: [0.12, 0.14, 0.16, 1]});
+        
+        // Okay, so this is the crux of it. The important thing here is that the only
+        // resource you have to pass is the set of points being rendered. That saves lots
+        // of resource management headaches since you don't have to do cpu precomputation
+        // and allocate extra buffers or whatnot. Not a huge deal, but simplifies usage
+        // a lot, in my opinion.
+        drawLines({
+          points: pointBuffer,
+          colors: colorBuffer,
+          count: n,
+          lineWidth: 4
+       });
+      });
+    });
+  }
+});
