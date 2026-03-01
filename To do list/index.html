@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do & Don't List App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f6fa;
+      margin: 0;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+    }
+    .container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    .list {
+      width: 45%;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #eee;
+      margin-bottom: 8px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .priority-high { color: red; font-weight: bold; }
+    .priority-medium { color: orange; }
+    .priority-low { color: green; }
+    .form-section {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    .form-section div {
+      width: 45%;
+    }
+    input, select, button {
+      padding: 8px;
+      margin: 5px 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>To-Do & Don't List</h2>
+
+  <div class="form-section">
+    <div>
+      <h3>Add To-Do</h3>
+      <input type="text" id="todoInput" placeholder="Enter to-do task" />
+      <select id="priority">
+        <option value="high">High Priority</option>
+        <option value="medium" selected>Medium Priority</option>
+        <option value="low">Low Priority</option>
+      </select>
+      <button id="addTodoBtn">Add To-Do</button>
+    </div>
+
+    <div>
+      <h3>Add Don't</h3>
+      <input type="text" id="dontInput" placeholder="Enter don't-do task" />
+      <button id="addDontBtn">Add Don't</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="list">
+      <h3>✅ To-Do List</h3>
+      <ul id="todoList"></ul>
+    </div>
+    <div class="list">
+      <h3>❌ Don't List</h3>
+      <ul id="dontList"></ul>
+    </div>
+  </div>
+
+  <script>
+    // Anonymous function for adding to-do
+    document.getElementById('addTodoBtn').addEventListener('click', function() {
+      const task = document.getElementById('todoInput').value.trim();
+      const priority = document.getElementById('priority').value;
+      if (task !== '') {
+        const li = document.createElement('li');
+        li.textContent = task;
+        li.classList.add('priority-' + priority);
+        document.getElementById('todoList').appendChild(li);
+        document.getElementById('todoInput').value = '';
+      }
+    });
+
+    // Anonymous function for adding don't-do
+    document.getElementById('addDontBtn').addEventListener('click', function() {
+      const task = document.getElementById('dontInput').value.trim();
+      if (task !== '') {
+        const li = document.createElement('li');
+        li.textContent = task;
+        document.getElementById('dontList').appendChild(li);
+        document.getElementById('dontInput').value = '';
+      }
+    });
+  </script>
+
+</body>
+</html>
