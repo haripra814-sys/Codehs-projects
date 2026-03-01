@@ -1,0 +1,1546 @@
+*{-webkit-backface-visibility: hidden;} html, body{height: 100%; width: 100%;}
+
+body{
+  background: linear-gradient(135deg,
+    #444 0%,
+    #222 100%) fixed;
+}
+
+$border-width: 10px;
+$lighter: #F3F3F3;
+$light:   #DFE0E3; 
+$medium:  #C5C6C8;
+$dark:    #A7AAAB;
+
+
+@mixin before-after{
+  content:"";
+  position: absolute;
+  display: block;
+  border-style: solid;
+}
+
+/* Positioning */
+ol{
+  list-style-type: none;
+  margin: 0;
+  padding: 40px;
+  text-indent: 0;
+  width: 80%;
+  margin: 0 auto;
+  text-align:center;
+}
+
+/* Layout properties */
+li{ 
+
+  filter: drop-shadow(32px 48px 8px rgba(0,0,0,0.4));
+   
+  display:inline-block;
+
+   /* Adjust for spacing */
+  margin: 50px 40px;
+  position: relative;
+  
+  //box-shadow: 0 0 0 1px #FF8484; /* comment out to see grid lines */
+
+  &:before,
+  &:after{
+  
+    display: none; /* comment out to see grid lines */
+    
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: auto;
+    background: rgba(255,0,0,0.5);
+    z-index: 1;
+  }
+  
+  /* horizontal grid */
+  &:before{
+    width: 1px;
+    height: 100%;
+    right: 0;
+  }
+  
+  /* vertical grid */
+  &:after{
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    box-shadow:
+      0 -50px 0 0 rgba(255,0,0,0.5),
+      0 22px 0 0 rgba(255,0,0,0.5),
+      0 8px 0 0 rgba(255,0,0,0.5);
+  }
+}
+
+div {
+  position: absolute;
+  font-size: 0;
+  color: transparent;
+  border-style: solid;
+  
+  span{
+    position: absolute;
+    display: block;
+    border-style: solid;
+  }
+}
+
+
+//////////////////////
+
+.a{
+
+  width: 100px;
+  height: 110px;
+  
+  div{
+    height: 20px;
+    width: 4px;
+    background: $light;
+    margin: 0 auto;
+    top: 12px;
+    left: 50px;
+
+    &:before{
+      @include before-after;
+      top: -3px;
+      height: 88px;
+      left: -33px;
+      border-color: transparent $medium $dark $light;
+      border-width: 0 10px 10px 10px; 
+      transform: skew(-22deg);
+      box-shadow: -5px -16px 0 -5px $light;
+      background: $medium;
+      z-index: -1;
+    }
+
+    &:after{
+      @include before-after;
+      top:21px;
+      left: 12px; 
+      height: 64px;
+      border-color: transparent $medium $dark $light;
+      border-width: 0 10px 10px 10px; 
+      transform: skew(22deg);
+      box-shadow: 5px -40px 0 -5px $medium;
+      background: $medium;
+    }
+  }
+  span{
+    top: -15px;
+    left: -9px;
+    border-color: $lighter transparent transparent transparent;
+    border-width: 12px 6px 0 6px;
+    z-index: 1;
+    
+   &:before{
+      @include before-after;
+      top: 58px;
+      left: -24px;
+      width: 35px;
+      border-width: $border-width 7px;
+      border-color: $dark transparent transparent transparent;
+    }
+
+     &:after{
+       @include before-after;
+       top: 46px;
+       left: -24px;
+       width: 23px;
+       border-width: 6px 13px;
+       border-color: transparent transparent $lighter transparent;
+    }
+  }
+  
+}
+
+//////////////////////
+
+.b{
+  
+  width: 92px;
+  height: 110px;
+  
+  div{
+    height: 90px;
+    width: 20px;
+    border-color: $lighter transparent $dark $light;
+    border-width: $border-width; 
+  
+    &:before{
+    @include before-after;
+    width: 52px;
+    height: 25px;
+    left: 0;
+    top: 45px;
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+    border-color: $dark $light $lighter $medium;
+    border-width: $border-width;
+  }
+  
+    &:after{
+    @include before-after;
+    top:0;
+    width: 52px;
+    height: 25px;
+    left: 0;
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+    border-color: $dark $light $lighter $medium;
+    border-width: $border-width;
+  }
+  }
+  span{
+    top: -10px;
+    left: 0;
+    width: 62px;
+    height: 45px;
+    border-top-right-radius: 33px;
+    border-bottom-right-radius: 33px;
+    border-color: $lighter $medium transparent transparent;
+    border-width: $border-width;
+    
+    &:after{
+      @include before-after;
+      top: 35px;
+      left: -10px;
+      width: inherit;
+      height: 45px;
+      border-top-right-radius: 33px;
+      border-bottom-right-radius: 33px;
+      border-color: transparent $medium $dark transparent;
+      border-width: $border-width;
+    }
+    
+    &:before{
+      @include before-after;
+      width: 16px;
+      height: 5px;
+      background: $dark;
+      box-shadow: 0 5px 0 0 $lighter;
+      top: 35px;
+      right: 0;
+      z-index: -1;
+    }
+  }
+  
+}
+
+//////////////////////
+
+.c {
+  
+  width: 94px;
+  height: 110px;
+  
+  div{
+    top: 10px;
+    left: 10px;
+    width: 80px - $border-width;
+    height: 80px - $border-width;
+    border-radius: 100%;
+    border-width: $border-width;
+    border-color: $dark transparent $lighter $medium;
+
+    &:before{
+      @include before-after;
+      width: 80px + $border-width;
+      height: 80px + $border-width;
+      border-radius: inherit;
+      border-width: $border-width;
+      border-color: $lighter transparent $dark $light; 
+      top: -20px;
+      left: -20px;
+    }
+  }
+  
+  span{
+    display: block;
+    position: absolute;
+    right: -3px;
+    top: -3px;
+    border-width: $border-width + 3px $border-width + 3px 0 0;
+    border-color: $medium transparent transparent transparent;
+  
+    &:before{
+      @include before-after;
+
+      top: 50px;
+      right: -13px;
+      border-width: $border-width + 3px 0 0 $border-width + 3px;
+      border-color: transparent transparent transparent $medium;  
+    }
+
+  }
+}
+
+//////////////////////
+
+.d{
+    width: 92px;
+    height: 110px;
+  
+  div{
+    height: 90px;
+    width: 72px;
+    left: 0;
+    top: 0;
+    border-color: $lighter $medium $dark $light;
+    border-width: $border-width; 
+    border-top-right-radius: 46px;
+    border-bottom-right-radius: 46px;
+
+    &:before{
+      @include before-after;
+      width: 52px;
+      height: 70px;
+      left: 0;
+      top: 0;
+      border-top-right-radius: 36px;
+      border-bottom-right-radius: 36px;
+      border-color: $dark $light $lighter $medium;
+      border-width: $border-width;
+    }
+  }
+}
+
+//////////////////////
+
+.e {
+  
+  width: 84px;
+  height: 110px;
+  
+  div{
+    top: 45px;
+    left: 0;
+    height: 0;
+    width: 58px;
+    border-color: $lighter $medium $dark transparent;
+    border-width: $border-width $border-width $border-width 0;
+
+    &:before,
+    &:after{
+      @include before-after;
+      border-color: inherit;
+      border-width: inherit;
+      width: 74px;
+    }
+    &:before{
+      top: -55px;
+    }
+    &:after{
+      bottom: -55px;   
+    }  
+  }
+  span{
+    z-index: 1;
+    height: 90px;
+    width: 0;
+    border-color: transparent transparent transparent $light;
+    border-width: $border-width 0 $border-width $border-width;
+    top: -55px;
+    
+    &:before,
+    &:after{
+      @include before-after;
+      border-color: transparent transparent transparent $medium;
+      border-width: inherit;
+      height: 25px;
+    }
+    &:before{
+      top: 45px;
+    }
+    &:after{
+      bottom: 45px;   
+    }  
+  } 
+}
+
+//////////////////////
+
+.f {
+  
+  margin-right: 20px; // Right spacing looks weird
+  width: 84px;
+  height: 110px;
+  
+  div{
+    top: 45px;
+    left: 0;
+    height: 0;
+    width: 58px;
+    border-color: $lighter $medium $dark transparent;
+    border-width: $border-width $border-width $border-width 0;
+
+    &:before{
+      @include before-after;
+      width: 14px;
+      height: 14px;
+      background: $medium;
+      top: 35px;
+    }
+
+    &:after{
+      @include before-after;
+      border-color: inherit;
+      border-width: inherit;
+      width: 74px;
+      top: -55px;
+    }
+  }
+  
+  span{
+    z-index: 1;
+    height: 90px;
+    width: 0;
+    border-color: transparent transparent $dark $light;
+    border-width: $border-width;
+    top: -55px;
+    
+    &:before{
+      @include before-after;
+      border-color: transparent transparent transparent $medium;
+      border-width: $border-width 0 0 $border-width;
+      height: 35px;
+      top: 45px;
+    }
+    
+    &:after{
+      @include before-after;
+      border-color: transparent transparent transparent $medium;
+      border-width: inherit;
+      height: 25px;
+      bottom: 45px;   
+    }  
+  } 
+}
+
+//////////////////////
+
+.g {
+
+  width: 94px;
+  height: 110px;
+  
+  div{
+    top: 10px;
+    left: 10px;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    border-width: $border-width;
+    border-color: $dark transparent $light $medium;
+
+    &:before{
+      @include before-after;
+      width: 90px;
+      height: 90px;
+      border-radius: inherit;
+      border-width: $border-width;
+      border-color: $lighter transparent $dark $light; 
+      top: -20px;
+      left: -20px;
+    }
+
+    &:after{
+       @include before-after;
+       position: absolute;
+       right: -3px;
+       top: -3px;
+       border-width: 13px 13px 0 0;
+       border-color: $medium transparent transparent transparent;
+    }
+  }
+  
+  span{
+    width: 30px;
+    height: 34px;
+    border-width: $border-width $border-width 4px 0;
+    border-color: $lighter $light transparent transparent; 
+    bottom: -3px;
+    right: -4px;
+    
+    &:before{
+      @include before-after;
+      width: 20px;
+      height: 20px;
+      border-width: $border-width $border-width 4px 0;
+      border-color: $dark $lighter transparent transparent; 
+      bottom: 0;
+      right: 0;
+    }
+    
+    &:after{
+      @include before-after;
+      border-width: $border-width;
+      border-color: transparent transparent transparent $light; 
+      right: 10px;
+      top: -10px;
+    }
+  }
+}
+
+//////////////////////
+
+.h{
+  width: 92px;
+  height: 110px;
+  
+  div{
+    height: 90px;
+    top: 0;
+    left: 0;
+    border-color: $lighter $medium $dark $light;
+    border-width: $border-width;
+    width: 0;
+
+    &:before {
+      @include before-after;
+      height: inherit;
+      border-color: inherit;
+      border-width: inherit;
+      top: -10px;
+      right: -82px;
+    }
+
+    &:after {
+      @include before-after;
+      width: 52px;
+      left: 0;
+      border-color: $dark transparent transparent transparent;
+      border-width: $border-width;
+      top: 45px;
+    }
+  }
+  span {
+    position: absolute;
+    display: block;
+    width: 52px;
+    top: 25px;
+    left: 0; 
+    border-color: transparent transparent $lighter transparent;
+    border-width: $border-width;
+  } 
+}
+
+//////////////////////
+
+.i {
+  width: 20px;
+  height: 110px;
+  
+  div{
+    width: 0;
+    left: 0;
+    top: 0;
+    height: 90px;
+    border-color: $lighter $medium $dark $light;
+    border-width: $border-width;
+  }
+}
+
+//////////////////////
+
+.j{
+  width: 67px;
+  height: 110px;
+  
+  div{
+    width: 0;
+    top: 0;
+    left: 47px;
+    height: 50px;
+    border-color: $lighter $medium $light $light;
+    border-width: $border-width;
+
+    &:after{
+      @include before-after;
+      bottom: -50px;
+      left: -60px;
+      width: 50px;
+      height: 40px;
+      border-color: transparent $medium $dark transparent;
+      border-width: 0 $border-width $border-width $border-width;
+      border-radius: 0 0 40px 40px;
+    }
+
+    &:before{
+      @include before-after;
+      bottom: -40px;
+      left: -50px;
+      width: 30px;
+      height: 30px;
+      border-color: transparent $light $lighter transparent;
+      border-width: 0 $border-width $border-width $border-width;
+      border-radius: 0 0 30px 30px;
+    }
+  }
+  span{
+    height: 1px;
+    bottom: -35px;
+    left: -56px;
+    transform: rotate(-45deg);
+    border-color: $light $lighter transparent $dark;
+    border-width: $border-width $border-width 0 $border-width;
+  }
+  
+}
+
+//////////////////////
+
+.k{
+  
+  width: 94px;
+  height: 110px;
+  
+  div{
+  width: 0;
+  left: 0;
+  top: 0;
+  height: 90px;
+  border-color: $lighter $medium $dark $light;
+  border-width: $border-width;
+  
+    &:before{
+      @include before-after;
+      height: 45px;
+      top: 45px;
+      left: 32px;
+      border-color: transparent $light $dark $medium;
+      border-width: 0 13px 10px 14px; 
+      transform: skew(42deg);
+    }
+  
+    &:after{
+      @include before-after;
+      height: 45px;
+      top: -10px;
+      left: 32px;
+      border-color: $lighter $medium transparent $light;
+      border-width: 10px 13px 0 14px; 
+      transform: skew(-42deg);
+    }
+  }
+  span{
+      z-index: 1;
+      width: 5px;
+      height: 0;
+      border-width: 0 6px 9px 10px ;
+      border-color: transparent transparent $lighter transparent;
+      top: 36px;
+      left: 0px;
+    
+    &:before{
+      @include before-after;
+      width: 5px;
+      height: 0;
+      border-width: 9px 6px 0 10px ;
+      border-color: $dark transparent transparent transparent;
+      top: 9px;
+      left: -10px;
+    }
+    
+  }
+  
+}
+
+//////////////////////
+
+.l{
+  
+  width: 84px;
+  height: 110px;
+  
+  div{
+    top: 90px;
+    left: 0;
+    height: 0;
+    width: 74px;
+    border-color: $lighter $medium $dark transparent;
+    border-width: $border-width $border-width $border-width 0;
+
+    &:after{
+      @include before-after;
+      height: 90px;
+      width: 0;
+      border-color: $lighter transparent transparent $light;
+      border-width: $border-width;
+      top: -100px;
+    }
+
+    &:before{
+      @include before-after;
+      border-color: transparent transparent transparent $medium;
+      border-width: 0 $border-width $border-width;
+      height: 90px; 
+      top: -100px;
+      left: 10px;
+    } 
+    
+  }
+  
+}
+
+//////////////////////
+
+.m{
+  
+  width: 110px;
+  height: 110px;
+  
+  div{
+    
+    top: 0;
+    left: 0;
+    height: 94px;
+    width: 0;
+    border-color: $lighter $medium $dark $light;
+    border-width: 6px 9px $border-width $border-width;
+
+    &:before{
+      @include before-after;
+      left: 81px;
+      height: inherit;
+      width: inherit;
+      border-color: inherit;
+      border-width: 6px $border-width $border-width 9px ;
+      top: -6px;
+    }
+
+    &:after{
+      @include before-after;
+      top: -5px;
+      left: 14px;
+      height: 56px;
+      border-color: transparent $light transparent transparent;
+      border-width: 31px 10px 0 0;
+      transform: rotate(-33deg);
+      box-shadow: 10px 0 0 $medium;
+      filter: drop-shadow(0 0 0 transparent);
+    }
+    
+  }
+  
+  span{
+    z-index: 1;
+    height: 67px;
+    top: -10px;
+    left: 58px;
+    border-color: transparent $light transparent transparent;
+    border-width: 0 10px 15px 0; 
+    transform: rotate(33deg);
+    
+    &:before{
+      @include before-after;
+      top: -1px;
+      left: 10px;
+      height: 57px;
+      border-color: transparent  transparent transparent $medium;
+      border-width: 31px 0 0 10px;
+    }
+    
+     &:after{
+       @include before-after;
+       transform: rotate(-33deg);
+       border-width: 12px 6px;
+       border-color: transparent transparent $dark transparent;
+       bottom: -26px;
+       left: 3px;
+    }
+  }
+  
+}
+
+//////////////////////
+
+.n{
+  
+  width: 88px;
+  height: 110px;
+  
+  div{
+
+    left: 0;
+    top: 0;
+    height: 94px;
+    width: 0;
+    border-color: $lighter $medium $dark $light;
+    border-width: 6px 9px $border-width $border-width;
+
+    &:before{
+      @include before-after;
+      left: 59px;
+      height: inherit;
+      width: inherit;
+      border-color: inherit;
+      border-width: $border-width $border-width 6px 9px;
+      top: -6px;
+    }
+
+    &:after{
+      @include before-after;
+      height: 91px;
+      top: -9px;
+      left: 24px;
+      border-color: transparent $light transparent transparent;
+      border-width: 30px $border-width 0 0; 
+      transform: rotate(-34deg);
+    }
+      
+  }
+  
+  span{
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+    border: 0;
+    z-index: 0;
+    
+    &:before{
+      @include before-after;
+      height: 91px;
+      top: -13px;
+      left: 33px;
+      border-color: transparent transparent transparent $medium;
+      border-width: 0 0 30px $border-width; 
+      transform: rotate(-34deg);
+  
+    }  
+  }
+  
+}
+
+//////////////////////
+
+.o{
+
+  width: 110px;
+  height: 110px;
+  
+  div{
+    left: 10px;
+    top: 10px;
+    width:80px - $border-width;
+    height: 80px - $border-width;
+    border-radius: 100%;
+    border-width: $border-width;
+    border-color: $dark $light $lighter $medium;
+
+    &:before{
+      @include before-after;
+      width: 80px + $border-width;
+      height: 80px + $border-width;
+      border-radius: inherit;
+      border-width: $border-width;
+      border-color: $lighter $medium $dark $light; 
+      top: -20px;
+      left: -20px;
+    }
+  }
+   
+}
+
+//////////////////////
+
+.p{
+  
+  width: 78px;
+  height: 110px;
+  
+  div{
+    left: 10px;
+    top: 10px;
+    width: 40px;
+    height: 33px;
+    border-radius: 0 40px 40px 0;
+    border-width: $border-width;
+    border-color: $dark $light $lighter $medium;
+    box-shadow: 0 -10px 0 $lighter;
+  
+    &:before{
+      @include before-after;
+      left: -20px;
+      top: -20px;
+      height: 90px;
+      width: 0px;
+      border-color: $lighter $medium $dark $light;
+      border-width: $border-width;
+      z-index: -1;
+    }
+  
+    &:after{
+      @include before-after;
+      top: -20px;
+      left: 0px;
+      width: 50px;
+      height: 53px;
+      border-radius: 0 36px 36px 0;
+      border-width: $border-width $border-width $border-width 0;
+      border-color: $lighter $medium $dark;
+  }
+    
+  }
+  
+  span{
+    width: 20px; 
+    height: 25px;
+    left: -10px;
+    top:43px;
+    border-color: $dark transparent transparent $medium;
+    border-right: 0;
+    border-width: $border-width 0 0 $border-width;
+  }
+}
+
+//////////////////////
+
+.q{
+  
+  width: 113px;
+  height: 110px;
+  
+  div{
+    left: 10px;
+    top: 10px;
+    width:80px - $border-width;
+    height: 80px - $border-width;
+    border-radius: 100%;
+    border-width: $border-width;
+    border-color: $dark $light $lighter $medium;
+
+    &:before{
+      @include before-after;
+      width: 80px + $border-width;
+      height: 80px + $border-width;
+      border-radius: inherit;
+      border-width: $border-width;
+      border-color: $lighter $medium $dark $light; 
+      top: -20px;
+      left: -20px;
+    }
+
+    &:after{
+      @include before-after;
+      transform: rotate(40deg);
+      border-width: $border-width $border-width $border-width 0;
+      border-color: $lighter $dark $medium transparent;
+      width: 7px;
+      bottom:-18px;
+      right: -19px; 
+    }
+  }
+  span{
+    z-index: 1; 
+    transform: rotate(40deg);
+    width: 0;
+    height: 0;
+    border-width: 12px $border-width 0 $border-width;
+    border-color: transparent $lighter;
+    bottom: 2px;
+    right: -10px;
+    
+    &:before{
+      @include before-after;
+      transform: rotate(2deg);
+      width: inherit;
+      height: inherit;
+      border-width: 0 $border-width $border-width $border-width;
+      border-color: transparent $medium;
+      bottom:-9px;
+      right: -10px;
+    }
+    
+    &:after{
+      @include before-after;
+      border-width: $border-width 0 $border-width $border-width;
+    border-color: $lighter transparent $medium $light;
+    width: 12px;
+    bottom: -9px;
+    right: 10px;
+    }    
+  }
+}
+
+//////////////////////
+
+.r{
+  
+  width: 80px;
+  height: 110px;
+  
+  div{
+    left: 10px;
+    top: 10px;
+    width: 40px;
+    height: 33px;
+    border-radius: 0 40px 40px 0;
+    border-width: $border-width;
+    border-color: $dark $medium $lighter $medium;
+    box-shadow: 0 -10px 0 $lighter;
+  
+  &:before{
+    @include before-after;
+    left: -20px;
+    top: -20px;
+    height: 90px;
+    width: 0px;
+    border-color: $lighter $medium $dark $light;
+    border-width: $border-width;
+    z-index: -1;
+  }
+  
+  &:after{
+    @include before-after;
+    top: -20px;
+    left: 0px;
+    width: 50px;
+    height: 53px;
+    border-radius: 0 36px 36px 0;
+    border-width: $border-width $border-width $border-width 0;
+    border-color: $lighter $light $dark;
+  }
+    
+  }
+  
+  span{
+    width: 20px; 
+    height: 25px;
+    left: -10px;
+    top:43px;
+    border-color: $dark transparent transparent $medium;
+    border-right: 0;
+    border-width: $border-width 0 0 $border-width;
+  
+    &:before{
+      @include before-after;
+      border-width: 0 12px $border-width 11px;
+      border-color: transparent $medium $dark $light;
+      height: 28px;
+      transform: skew(34deg);
+      top: -1px;
+      left: 23px;
+      z-index: 1;
+    }
+    
+    &:after{
+      @include before-after; 
+      width: 25px;
+      height: 10px;
+      top: -10px;
+      left: 6px;
+      background: $medium;
+      box-shadow: inset 13px 0 0 $light;
+      border: none;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      z-index: 2;
+      transform: skew(36deg);
+    }
+    
+    
+    
+  }
+
+}
+
+//////////////////////
+
+.s{
+  
+  width: 84px;
+  height: 110px;
+  
+  div{
+    top: 10px;
+    left: 10px;
+    width: 34px;
+    height: 25px;
+    border-radius: 40px 0 0 40px;
+    border-width: $border-width 0 $border-width $border-width;
+    border-color: $dark transparent $lighter $medium;
+
+    &:before{
+      @include before-after;
+      top: -20px;
+      left: -20px;
+      height: 45px;
+      width: 44px;
+      border-radius: 40px 0 0 40px;
+      border-width: $border-width 0 $border-width $border-width;
+      border-color: $lighter $dark $dark $light;
+    }
+
+    &:after{
+      @include before-after;
+      left:34px;
+      top:-20px;
+      width: 20px;
+      height: 0;
+      border-width: $border-width $border-width $border-width 0;
+      border-color: $lighter $medium $dark transparent;
+    }
+    
+  }
+  
+  span{
+    display: block;
+    position: absolute;
+    top:35px;
+    left: 10px;
+    width: 34px;
+    height: 25px;
+    border-radius: 0 40px 40px 0;
+    border-width: $border-width $border-width $border-width 0;
+    border-color: $dark $light $lighter transparent;
+    
+    &:before{
+      @include before-after;
+      top:-20px;
+      height:45px;
+      width: 44px;
+      border-radius: 0 40px 40px 0;
+      border-width: $border-width $border-width $border-width 0;
+      border-color: $lighter $medium $dark transparent;    
+    }
+    
+    &:after{
+      @include before-after;
+      left:-30px;
+      top:25px;
+      width: 20px;
+      height: 0px;
+      border-width: $border-width 0 $border-width $border-width;
+      border-color: $lighter transparent $dark $light;
+      
+    }   
+  }  
+}
+
+//////////////////////
+
+.t{
+  
+  width: 92px;
+  height: 110px;
+  
+  div{
+    width: 72px;
+    top: 0;
+    left: 0;
+    height: 0;
+    border-width: $border-width;
+    border-color: $lighter $medium $dark $light;
+
+    &:before{
+      @include before-after;
+      height: 80px;
+      width: 0;
+      border-color: transparent $medium $dark $light;
+      left: 0; right: 0;
+      margin: auto;
+      top: $border-width;
+      border-width: $border-width;
+      border-top:transparent;
+    }
+  }
+  
+  span:before{
+    @include before-after;
+    top: -3px;
+    left: 23px;
+    border-width: 0 0 $border-width $border-width;
+    border-color: transparent transparent $light transparent;
+  }
+
+  span:after{
+    @include before-after;
+    top: -3px;
+    left: 33px; 
+    border-width: $border-width 0 0 $border-width;
+    border-color: transparent transparent transparent $medium; 
+  }
+}
+
+//////////////////////
+
+.u{
+  
+  width: 92px;
+  height: 110px;
+  
+  div{
+    height: 50px;
+    top: 0;
+    left: 0;
+    border-color: $lighter $medium transparent $light;
+    border-width: $border-width $border-width 0 $border-width;
+    width: 0;
+
+    &:before {
+      @include before-after;
+      height: inherit;
+      border-color: inherit;
+      border-width: inherit;
+      top: -10px;
+      right: -82px;
+    }
+
+    &:after {
+      @include before-after;
+      border-bottom-right-radius: 72px;
+      border-bottom-left-radius: 72px;
+      border-color: transparent $medium $dark $light;
+      border-width: 0 $border-width $border-width;
+      bottom: -50px;
+      left: -10px;
+      width: 72px;
+      height: 40px;
+    }
+  }
+  span {
+    border-bottom-right-radius: 72px;
+    border-bottom-left-radius: 72px;
+    border-color: transparent $light $lighter $medium;
+    border-width: 0 $border-width $border-width;
+    bottom: -40px;
+    left: 0;
+    width: 52px;
+    height: 40px;
+    box-shadow: 0 1px 0 $medium;
+  } 
+}
+
+//////////////////////
+
+.v{
+  
+  width: 103px;
+  height: 110px;
+  
+  div{
+    left: 42px;
+    top: 78px;
+    width: 0;
+    background: transparent;
+    width: 12px;
+    height: 15px;
+
+    &:after{
+      @include before-after;
+      height: 89px;
+      top: -81px;
+      left: 18px;
+      border-color: $lighter $medium transparent $light;
+      border-width: $border-width $border-width 0; 
+      transform: skew(-22deg);
+      box-shadow: 5px 16px 0 -5px $medium;
+    }
+  }
+  span{
+    z-index: 1;
+    background: $medium;
+    width: 4px;
+    height: 18px;
+    top: -4px;
+    left: -4px;
+
+    &:before{
+      @include before-after;
+      height: 68px;
+      top: -80px;
+      left: -28px;
+      border-color: $lighter $medium transparent $light;
+      border-width: $border-width $border-width 0; 
+      transform: skew(22deg);
+      box-shadow: -5px 37px 0 -5px $light;
+    }
+
+    &:after{
+      @include before-after;
+      left: 2px;
+      top: 18px;
+      border-color: transparent transparent $dark transparent;
+      border-width: 0 6px 12px 6px;
+      width: 0; 
+    } 
+  }
+}
+
+//////////////////////
+
+.w{
+  
+  width: 186px;
+  height: 110px;
+  
+  & > div{
+    
+    background: $light;
+    width: 5px;
+    height: 17px;
+    top: 75px;
+    left: 133px;
+    box-shadow:
+      -10px 0 0 $medium,
+      -80px 0 0 $light,
+      -90px 0 0 $medium;
+
+    &:before,
+    &:after{
+      @include before-after;
+      height: 67px;
+      top: -78px;
+      background: $light;
+    }
+
+    &:before{
+      left: 13px;
+      border-color: $lighter $medium transparent $light;
+      border-width: $border-width $border-width 0; 
+      transform: skew(-23deg);
+      box-shadow:
+        5px 37px 0 -5px $medium,
+        -85px 4px 0 -5px $light,
+        -85px -5px 0 -5px $light;
+    }
+
+    &:after{
+      height: 67px;
+      top: -78px;
+      left: -119px;
+      border-color: $lighter $medium transparent $light;
+      border-width: $border-width $border-width 0; 
+      transform: skew(23deg);
+      box-shadow:
+        -5px 37px 0 -5px $light,
+        85px 4px 0 -5px $medium,
+        85px -5px 0 -5px $medium;
+    }
+  
+    div{
+    &:before,
+    &:after{
+      @include before-after;
+      height: 85px;
+      top: -79px;
+      box-shadow: 0 0 0 transparent;
+    }
+    
+    &:before{
+      left: -68px;
+      border-color: transparent transparent transparent $medium;
+      border-width: 25px 0 0 11px; 
+      transform: rotate(23deg);      
+    }
+
+    &:after{
+      left: -35px;
+      border-color: transparent $light transparent transparent;
+      border-width: 25px 11px 0 0; 
+      transform: rotate(-23deg);
+    } 
+  }
+  }
+  
+  span{
+    z-index: 1;
+    border-color: $lighter transparent transparent transparent;
+    border-width: 7px 8px 0;
+    left: -54px;
+    top: -81px;
+    
+    &:before,
+    &:after{
+      @include before-after;
+      border-color: transparent transparent $dark transparent;
+      border-width: 0 6px 14px;
+      width: 0;
+      height: 0;
+      top: 89px;
+    }
+    
+    &:before{
+      left: 34px;
+    }
+    
+    &:after{
+      left: -46px;
+    }
+  }
+  
+}
+
+//////////////////////
+
+.x{
+  
+  width: 94px;
+  height: 110px;
+  
+  div{
+    top: 42px;
+    left: 47px;
+    width: 5px;
+    background: transparent;
+    
+    &:before{
+      @include before-after;
+      background: $medium;
+      height: 90px;
+      top: -45px;
+      left: -13px;
+      border-color: $lighter $medium $dark $light;
+      border-width: $border-width; 
+      transform: skew(34deg);
+    }
+    
+  }
+  
+  span{
+    z-index: 1;
+    width: 4px;
+    height: 9px;
+    top: -6px;
+    background: $light;
+    left: -3px;
+    box-shadow: -10px 16px 0 $medium;
+    
+    &:before{
+      @include before-after;
+      background: $light;
+      height: 32px;
+      top: -42px;
+      left: 10px;
+      border-color: $lighter $medium transparent $light;
+      border-width: 9px $border-width 0; 
+      transform: skew(-34deg);
+      box-shadow: 5px 20px 0 -5px $medium;
+    }
+    
+    &:after{
+      @include before-after;
+      background: $medium;
+      height: 32px;
+      top: 27px;
+      left: -36px;
+      border-color: transparent $medium $dark $light;
+      border-width: 0 $border-width 9px $border-width;   transform: skew(-34deg);
+      box-shadow: -5px -19px 0 -5px $light;
+    }
+  } 
+}
+
+//////////////////////
+
+.y{
+  
+  width: 95px;
+  height: 110px;  
+  
+  div{
+    left: 37px;
+    bottom: 0px;
+    height: 45px;
+    width: 0;
+    border-color: transparent $medium $dark $light;
+    border-width: 0 $border-width $border-width;
+  
+    &:before{
+      @include before-after;
+      background: $light;
+      height: 46px;
+      top: -55px;
+      left: -29px;
+      border-color: $lighter $medium transparent $light;
+      border-width: $border-width $border-width 0 $border-width; 
+      transform: skew(34deg);
+    }
+
+      &:after{
+      @include before-after;
+      width: 5px;
+      height: 6px;
+      background: $light;
+      top: -12px;
+    }
+  }
+  
+  span{
+    z-index: 1;
+    background: $light;
+    height: 33px;
+    top: -55px;
+    left: 14px;
+    border-color: $lighter $medium transparent $light;
+    border-width: $border-width $border-width 0 $border-width; 
+    transform: skew(-34deg);
+    box-shadow: 5px 18px 0 -5px $medium;
+  } 
+  
+}
+
+//////////////////////
+
+.z{
+  
+  width: 92px;
+  height: 110px;
+  
+  div{
+    
+    width: 76px;
+    left: 0;
+    top: 0;
+    height: 0;
+    border-width: $border-width 6px 9px  $border-width;
+    border-color: $lighter $medium $dark $light;
+
+    &:before{
+      @include before-after;
+      width: inherit;
+      border-width: 9px $border-width $border-width 6px;
+      border-color: inherit;
+      top: 81px;
+      left: -10px;
+    }
+
+    &:after{
+      @include before-after;
+      height: 99px;
+      top: -19px;
+      left: 28px;
+      border-color: transparent $light transparent transparent;
+      border-width: 20px $border-width 2px 0; 
+      transform: rotate(42deg);
+    }
+    
+  }
+  
+  span{
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+    border: 0;
+    z-index: 0;
+    
+    &:before{
+      @include before-after;
+      height: 99px;
+      top: -11px;
+      left: 34px;
+      border-color: transparent transparent transparent $medium;
+      border-width: 2px 0 20px $border-width; 
+      transform: rotate(42deg);
+    }
+
+  }
+  
+}
