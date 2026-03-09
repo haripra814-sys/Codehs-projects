@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Favorite Colors</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    .color-box {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .color-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    .color-label {
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h2 class="text-center mb-4">🎨 My Favorite Colors</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+
+      <!-- Color Boxes with Tooltips -->
+      <div class="col"><div class="color-box bg-primary text-white" data-bs-toggle="tooltip" title="#0d6efd">Primary</div></div>
+      <div class="col"><div class="color-box bg-secondary text-white" data-bs-toggle="tooltip" title="#6c757d">Secondary</div></div>
+      <div class="col"><div class="color-box bg-success text-white" data-bs-toggle="tooltip" title="#198754">Success</div></div>
+      <div class="col"><div class="color-box bg-danger text-white" data-bs-toggle="tooltip" title="#dc3545">Danger</div></div>
+      <div class="col"><div class="color-box bg-warning text-dark" data-bs-toggle="tooltip" title="#ffc107">Warning</div></div>
+      <div class="col"><div class="color-box bg-info text-dark" data-bs-toggle="tooltip" title="#0dcaf0">Info</div></div>
+      <div class="col"><div class="color-box bg-dark text-white" data-bs-toggle="tooltip" title="#212529">Dark</div></div>
+      <div class="col"><div class="color-box text-white" style="background-color: coral;" data-bs-toggle="tooltip" title="#FF7F50">Coral</div></div>
+      <div class="col"><div class="color-box text-white" style="background-color: mediumseagreen;" data-bs-toggle="tooltip" title="#3CB371">Sea Green</div></div>
+      <div class="col"><div class="color-box text-white" style="background-color: orchid;" data-bs-toggle="tooltip" title="#DA70D6">Orchid</div></div>
+      <div class="col"><div class="color-box text-white" style="background-color: teal;" data-bs-toggle="tooltip" title="#008080">Teal</div></div>
+      <div class="col"><div class="color-box text-white" style="background-color: crimson;" data-bs-toggle="tooltip" title="#DC143C">Crimson</div></div>
+      <div class="col"><div class="color-box text-white" style="background-color: goldenrod;" data-bs-toggle="tooltip" title="#DAA520">Goldenrod</div></div>
+      <div class="col"><div class="color-box text-white" style="background-color: royalblue;" data-bs-toggle="tooltip" title="#4169E1">Royal Blue</div></div>
+      <div class="col"><div class="color-box text-white" style="background-color: hotpink;" data-bs-toggle="tooltip" title="#FF69B4">Hot Pink</div></div>
+
+    </div>
+  </div>
+
+  <!-- Bootstrap JS for tooltip functionality -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Initialize Bootstrap tooltips
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(el => new bootstrap.Tooltip(el));
+  </script>
+</body>
+</html>
