@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>University Open Electives</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    .jumbotron {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                  url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b') center/cover no-repeat;
+      color: white;
+      padding: 5rem 2rem;
+      border-radius: 0;
+      text-align: center;
+    }
+    .card img {
+      height: 200px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Jumbotron -->
+  <div class="jumbotron">
+    <h1 class="display-4">Explore Open Electives</h1>
+    <p class="lead">Choose from a wide range of interdisciplinary courses this semester</p>
+  </div>
+
+  <!-- Subject Cards with Collapse -->
+  <div class="container my-5">
+    <div class="row g-4">
+
+      <!-- Subject 1 -->
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <img src="https://images.unsplash.com/photo-1521790797524-b2497295b8a0" class="card-img-top" alt="Photography">
+          <div class="card-body">
+            <h5 class="card-title">Digital Photography</h5>
+            <p class="card-text">Capture the world through your lens. Learn the art and science of photography.</p>
+            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="collapse" data-bs-target="#photo-details">
+              Learn More
+            </button>
+            <div id="photo-details" class="collapse mt-2">
+              <p>This elective explores composition, editing, lighting, and digital techniques to produce stunning visuals.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subject 2 -->
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f" class="card-img-top" alt="AI & ML">
+          <div class="card-body">
+            <h5 class="card-title">Introduction to AI & ML</h5>
+            <p class="card-text">Dive into the future with hands-on learning in artificial intelligence and machine learning.</p>
+            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="collapse" data-bs-target="#ai-details">
+              Learn More
+            </button>
+            <div id="ai-details" class="collapse mt-2">
+              <p>Topics include Python programming, supervised learning, neural networks, and ethical AI.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subject 3 -->
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d" class="card-img-top" alt="Creative Writing">
+          <div class="card-body">
+            <h5 class="card-title">Creative Writing</h5>
+            <p class="card-text">Find your voice and bring stories to life through guided workshops and exercises.</p>
+            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="collapse" data-bs-target="#writing-details">
+              Learn More
+            </button>
+            <div id="writing-details" class="collapse mt-2">
+              <p>Includes poetry, fiction, and personal essays. Learn how to edit and publish your work.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-light text-center py-4 border-top">
+    <p class="mb-0">&copy; 2025 Modern University | Empowering curious minds</p>
+  </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
