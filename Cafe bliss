@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cafe Bliss – Blissville</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: #6f4e37;
+    }
+
+    .menu-icon {
+      color: #6f4e37;
+      margin-right: 8px;
+    }
+
+    .card img {
+      height: 200px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="#">Cafe Bliss</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#specials">Specials</a></li>
+          <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Alerts for Daily Specials and Events -->
+  <div class="container mt-4">
+    <div class="alert alert-success" role="alert">
+      🌟 <strong>Today's Special:</strong> Get a free pastry with every cappuccino!
+    </div>
+    <div class="alert alert-info" role="alert">
+      📅 <strong>Upcoming Event:</strong> Live acoustic night this Friday at 7 PM.
+    </div>
+  </div>
+
+  <!-- Menu Section -->
+  <div class="container my-5" id="menu">
+    <h2 class="text-center mb-4">Our Menu</h2>
+    <div class="row g-4">
+
+      <!-- Dish 1 -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307" class="card-img-top" alt="Espresso">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="bi bi-cup-hot-fill menu-icon"></i>Espresso
+            </h5>
+            <p class="card-text">Rich and aromatic espresso shot brewed to perfection.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dish 2 -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff" class="card-img-top" alt="Croissant">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="bi bi-bagel menu-icon"></i>Butter Croissant
+            </h5>
+            <p class="card-text">Flaky, golden croissants served warm with creamy butter.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dish 3 -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" class="card-img-top" alt="Smoothie">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="bi bi-cup-straw menu-icon"></i>Berry Smoothie
+            </h5>
+            <p class="card-text">Fresh berry smoothie blended with yogurt and honey.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 bg-white mt-5 border-top">
+    <p class="mb-0">&copy; 2025 Cafe Bliss, Blissville | Follow us on
+      <i class="bi bi-instagram"></i> <i class="bi bi-facebook"></i>
+    </p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
