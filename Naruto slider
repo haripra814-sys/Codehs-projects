@@ -1,0 +1,267 @@
+<!-- HTML -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Слайдер | Проект 3</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div
+          style="
+            background: linear-gradient(229.99deg, #f7a605 -26%, #edf506 145%);
+          "
+        >
+          <h1>Konoha Yellow Lightning - Minato Namikaze</h1>
+          <p>Naruto</p>
+        </div>
+        <div
+          style="
+            background: linear-gradient(215.32deg, #2e0708 -1%, #9e0706 124%);
+          "
+        >
+          <h1>Itachi Uchiha</h1>
+          <p>Naruto</p>
+        </div>
+        <div
+        style="
+        background: linear-gradient(#63045b, #dc0996);" >
+        <h1>Sakura</h1>
+        <p>Naruto</p>
+        </div>
+        <div
+        style="
+        background: linear-gradient(#07a6c5, #88afc5);" >
+        <h1>Hatake Kakashi</h1>
+        <p>Naruto</p>
+        </div>
+        <div
+          style="
+          background: linear-gradient(#000000, #FFFFFF);" >
+          <h1>Kaneki</h1>
+          <p>Tokyo Ghoul</p>
+          </div>
+          <div
+          style="
+            background: linear-gradient(215.32deg, #3c0156 -1%, #0a0a7d 124%);
+          "
+        >
+        <h1>Sasuke Uchiha</h1>
+        <p>Naruto</p>
+        </div>  
+        <div
+          style="
+            background: linear-gradient(221.87deg, #380860 1%, #5305af 128%);
+          "
+        >
+          <h1>Madara Uchiha</h1>
+          <p>Naruto</p>
+        </div>
+        <div
+          style="
+            background: linear-gradient(220.16deg, #ff6201 -8%, #f39102 138%);
+          "
+        >
+          <h1>Naruto</h1>
+          <p>Naruto</p>
+        </div>
+      </div>
+      <div class="main-slide">
+        <div
+          style="
+            background-image: url('https://p4.wallpaperbetter.com/wallpaper/198/217/128/naruto-anime-uzumaki-naruto-blue-eyes-konoha-angry-hd-wallpaper-preview.jpg');
+          "
+        ></div>
+        <div
+          style="
+            background-image: url('https://wallpapercrafter.com/desktop4/1239813-Anime-Naruto-Madara-Uchiha-Rinnegan-Naruto-indoors.jpg');
+          "
+    
+        ></div>
+        <div
+          style="
+          background-image: url('https://img3.akspic.ru/previews/6/7/0/4/6/164076/164076-saske_uchiha-itachi_uchiha-madara_uchiha-kakashi_hatake-uchiha_obito-550x310.jpg');
+          "></div>
+        <div
+          style="
+          background-image: url('https://tipik.ru/wp-content/uploads/2019/10/%D0%A7%D0%B5%D1%80%D0%BD%D0%BE-%D0%B1%D0%B5%D0%BB%D1%8B%D0%B5-%D0%B0%D1%80%D1%82%D1%8B-%D0%A2%D0%BE%D0%BA%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D0%B9-%D0%B3%D1%83%D0%BB%D1%8C003.jpg');
+          "></div>
+      <div
+      style="
+        background-image: url('https://99px.ru/sstorage/53/2020/08/tmb_314922_267129.jpg');
+      "
+    ></div>
+    <div
+    style="
+    background-image: url('https://p4.wallpaperbetter.com/wallpaper/685/512/879/anime-boys-sakura-naruto-picture-in-picture-hd-wallpaper-preview.jpg');
+    "></div>
+        <div
+          style="
+            background-image: url('https://img2.akspic.ru/crops/5/6/3/6/2/126365/126365-anime-art-rot-multfilm-krasnyj_cvet-1920x1080.jpg');
+          "
+        ></div>
+       
+        <div
+          style="
+            background-image: url('https://foni.club/uploads/posts/2023-02/1676888907_foni-club-p-oboi-minato-na-planshet-10.jpg');
+          "
+        ></div>
+      </div>
+      <div class="controls">
+        <button class="down-button">
+          <i class="fas fa-arrow-down"></i>
+        </button>
+        <button class="up-button">
+          <i class="fas fa-arrow-up"></i>
+        </button>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
+
+
+// Css
+
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  height: 100vh;
+}
+
+.container {
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+.sidebar {
+  height: 100%;
+  width: 35%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s ease-in-out;
+}
+
+.sidebar > div {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.sidebar h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+  margin-top: -30px;
+}
+
+.main-slide {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 35%;
+  width: 65%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.main-slide > div {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 100%;
+  width: 100%;
+}
+
+button {
+  background-color: #fff;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 15px;
+}
+
+button:hover {
+  color: #222;
+}
+
+button:focus {
+  outline: none;
+}
+
+.container .controls button {
+  position: absolute;
+  left: 35%;
+  top: 50%;
+  z-index: 100;
+}
+
+.container .controls .down-button {
+  transform: translateX(-100%);
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.container .controls .up-button {
+  transform: translateY(-100%);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+// Javascript
+
+const upBtn = document.querySelector('.up-button')
+const downBtn = document.querySelector('.down-button')
+const sidebar = document.querySelector('.sidebar')
+const container = document.querySelector('.container')
+const mainSlide = document.querySelector('.main-slide')
+const slidesCount = mainSlide.querySelectorAll('div').length
+let activeSlidesIndex = 0
+sidebar.style.top =`-${(slidesCount-1) * 100}vh`
+upBtn.addEventListener('click', () =>{
+        changeSlide('up');
+ 
+    })
+downBtn.addEventListener('click', () =>{
+    changeSlide('down')
+})
+  
+function changeSlide(direction) {
+    if (direction === 'up') {
+        activeSlidesIndex++
+        if(activeSlidesIndex === slidesCount)
+        {
+            activeSlidesIndex = 0
+        }
+        } else if  (direction ==='down') {
+            activeSlidesIndex--  
+            if (activeSlidesIndex <  0) {
+                activeSlidesIndex = slidesCount - 1
+            }
+        }
+            const height = container.clientHeight
+            mainSlide.style.transform = `translateY(-${activeSlidesIndex * height}px)`
+            sidebar.style.transform = `translateY(${activeSlidesIndex * height}px)`
+        }
+        
