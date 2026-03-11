@@ -1,0 +1,48 @@
+// css
+
+.app-container {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.profile-image {
+  width: 200px;
+  border-radius: 50%;
+  margin: 20px 0;
+}
+
+.description {
+  font-size: 1.2rem;
+  max-width: 500px;
+  margin: auto;
+  color: #444;
+}
+
+// javascript
+
+import jiyaImage from './assets/jiya.jpg';
+
+import React from 'react';
+import './App.css';
+import jiyaImage from './assets/jiya.jpg'; // Import the image
+
+function App() {
+  return (
+    <div className="app-container">
+      <header>
+        <h1>Hi, I’m Jiya! 👋</h1>
+      </header>
+
+      <img src={jiyaImage} alt="Jiya" className="profile-image" />
+
+      <p className="description">
+        I’m an enthusiastic individual passionate about web development,
+        creativity, and sharing ideas with the world. Welcome to my personal webpage!
+      </p>
+    </div>
+  );
+}
+
+export default App;
+
