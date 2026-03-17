@@ -1,0 +1,37 @@
+A sleek, minimalist productivity tool built with a focus on clean architecture, modular styling, and responsive design. This project demonstrates the integration of Pug templates and SCSS preprocessing to create a maintainable front-end codebase.
+
+🚀 Features
+Dynamic Task Management: Add, complete, and delete tasks in real-time.
+
+Persistent Storage: Uses localStorage to ensure your list remains even after a page refresh.
+
+Responsive UI: Fully optimized for mobile, tablet, and desktop viewing.
+
+Modular Styling: Built using SCSS variables and mixins for a consistent design system.
+
+🛠️ Tech Stack
+Templating: Pug (for clean, readable HTML structures).
+
+Styling: SCSS (using nesting and variables for scalable CSS).
+
+Logic: Vanilla JavaScript (ES6+).
+
+
+
+🏗️ Architecture Highlight: SCSS & Pug
+Instead of standard HTML/CSS, I chose a preprocessed workflow to simulate a professional environment:
+
+Pug allowed me to write shorthand, error-free markup.
+
+SCSS was utilized to create a themeable system. I used a primary color palette and flexbox mixins to ensure the UI stays "pixel-perfect" across devices.
+
+🧠 The "Grit" Factor (Challenges Overcome)
+The Challenge: Handling data persistence. Initially, the list disappeared on refresh.
+The Solution: I implemented a JavaScript function to stringify the task array into JSON and store it in the browser's localStorage. I then wrote a "load" event listener to parse that data back into the UI when the app starts.
+
+📈 Future Roadmap
+[ ] Add "Categories" or "Tags" (e.g., School, Coding, Biology).
+
+[ ] Implement a "Dark Mode" toggle using SCSS variables.
+
+[ ] Add drag-and-drop reordering functionality.
