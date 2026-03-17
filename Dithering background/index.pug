@@ -1,0 +1,27 @@
+- let palettes = {
+-		'🦁': '#a728a9 #ce3ec1 #f2408a #ffa26c #ffdb83', 
+- 	'🐯': '#7019fb #6b5bfc #4799fc #34d6fd #32fcfe', 
+- 	'🦊': '#360b76 #5717b6 #7322e9 #a437f2 #d255fb', 
+- 	'🐺': '#006dee #0093fa #00bbee #00eadf #88ffe9', 
+- 	'🦝': '#f75759 #ff7f52 #ff9352 #ffba4a #fade73', 
+- 	'🐮': '#26a7fb #45c3fd #75d9fd #a0ebff #e7faff', 
+- 	'🐭': '#ffb528 #ff8c40 #f86759 #e14b71 #bb3e85', 
+- 	'🐱': '#95ffdc #00e1fa #00c1f6 #419fe3 #717dbf', 
+- 	'🐼': '#b5ce4f #eed54e #fbb64b #fc7c64 #eb6575', 
+- 	'🐻': '#885789 #cf6c84 #f7966f #f6d169 #8bbd69', 
+- 	'🐨': '#00aab7 #2889ac #48678f #8478ac #fd98b3', 
+- 	'🐰': '#ffca81 #f29e85 #94688c #595678 #4c7ba3', 
+- 	'🦔': '#f9ffce #e7cab2 #b8a09f #91ffe2 #00b3ff', 
+- 	'🐥': '#92ffe1 #5baeff #fdffcd #ff82a3 #a06eb2'
+- }
+
+svg(width='0' height='0' aria-hidden='true')
+	filter#dither(primitiveUnits='objectBoundingBox')
+		feTurbulence(type='fractalNoise' baseFrequency='3.71')
+		feDisplacementMap(in='SourceGraphic' scale='.2')
+		feBlend(in2='SourceGraphic')
+		
+- for(let p in palettes)
+	- let a = palettes[p].split(' '), n = a.length;
+	- a = a.map((c, i) => `${c}${(i + 1) ? ' 0' : ''}${n - (i + 1) ? ` ${(i + 1)/n*100}%` : ''}`);
+	.card(style=`--sl: ${a.join(', ')}`) #{p}

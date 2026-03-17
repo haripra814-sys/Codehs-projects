@@ -1,0 +1,98 @@
+@import 'compass/css3';
+
+$w: 13rem;
+$f: 1.5;
+$h: $f*$w;
+$n: 7;
+$g: 1rem;
+
+@function dots($n: 2) { // generate dither pixels
+	$dots: ();
+	
+	@for $i from 0 to $n {
+		$sx: ($i + 1)*4px;
+		
+		@for $j from 0 to 2 {
+			$sg: pow(-1, $j);
+			$dx: if(($i + $j)%2 > 0, 50%, calc(50% + #{.5*$sx}));
+			$dy: $sx - 2px + $sg*1px;
+			
+			@for $k from 0 to 2 {
+				$dots: $dots, 
+					var(--disc) $dx calc(.5*var(--unit) + #{pow(-1, $k)*$dy})/ #{$sx} var(--unit)
+			}
+		}
+	}
+	
+	@return $dots
+}
+
+body { /* just layout stuff, nothing to do with card backgrounds */
+	--h: #{$f*$w};
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: repeat(var(--n, #{$n}), var(--w, #{$w}));
+	grid-gap: $g;
+	place-content: center;
+	margin: 0;
+	padding: $g;
+	min-height: 100vh;
+	background: #333;
+	
+	@for $i from 1 through $n {
+		@media (max-width: ($n - $i + 1)*$w + ($n - $i + 2)*$g) {
+			@if $i == $n {
+				--w: 100%;
+				--h: #{$f*100vw};
+				--fs: 25vw
+			}
+			@else { --n: #{$n - $i} }
+		}
+	}
+}
+
+p {
+	grid-column: 1/ -1;
+	color: #ededed;
+	font: clamp(.875em, 3vw, 1.5em) cursive;
+	text-align: center;
+	text-wrap: balance
+}
+
+a { color: hotpink }
+
+.card {
+	display: grid; /* emoji placement */
+	place-content: center;
+	position: relative;
+	width: var(--w); height: var(--h);
+	border-radius: 7px;
+	box-shadow: 2px 2px 17px #000;
+	font-size: var(--fs, 4em); /* emoji size */
+	
+	&:before, &:after {
+		/* use absolutely positioned pseudos covering 
+	 	 * entire card to create dithered background */
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		border-radius: inherit;
+		content: ''
+	}
+	
+	&:before {
+		/* striped background on the :before (bottom layer) */
+		background: Linear-Gradient(var(--slist0))
+	}
+	
+	&:after { /* masking magic on top background layer */
+		--n: calc(2*var(--dn) + 1);
+		--unit: calc(var(--h)/var(--n));
+		--stripe: linear-gradient(transparent 50%, red 0) 0 0/ 100% calc(2*var(--unit));
+		--disc: radial-gradient(circle, red .5px, transparent 1px);
+		--dots: #{dots()};
+		background: Linear-Gradient(transparent calc(50%/var(--n)), var(--slist1), transparent 0);
+		mask: var(--stripe), var(--dots);
+		mask-composite: exclude
+	}
+}
