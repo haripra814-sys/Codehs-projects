@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open-Source Gene Guard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-top">
+        <h1 id="title">Open-Source Gene Guard</h1>
+        <button id="langToggle" class="lang-btn">ES</button>
+      </div>
+      <p id="subtitle">
+        A public dashboard for visualizing how environmental toxins can trigger DNA bit-flips.
+      </p>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2 id="inputSectionTitle">DNA Risk Input</h2>
+        <form id="analyzeForm">
+          <label id="dnaLabel" for="dnaInput">DNA Sequence</label>
+          <textarea
+            id="dnaInput"
+            rows="4"
+            placeholder="Example: ATGCGGTACTGACCGT"
+            required
+          ></textarea>
+
+          <label id="toxinLabel" for="toxinInput">Toxin Level (%)</label>
+          <input id="toxinInput" type="range" min="0" max="100" value="35" />
+          <p class="small"><span id="toxinValue">35</span>%</p>
+
+          <button type="submit" id="analyzeBtn">Analyze Community Risk</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2 id="resultsTitle">Live Results</h2>
+        <div class="results-grid">
+          <div>
+            <p class="metric-label" id="mutLabel">8-oxoG Mutations</p>
+            <p class="metric-value" id="mutValue">--</p>
+          </div>
+          <div>
+            <p class="metric-label" id="healthLabel">Community Health Score</p>
+            <p class="metric-value" id="healthValue">--</p>
+          </div>
+        </div>
+        <p id="errorBox" class="error hidden"></p>
+        <canvas id="integrityChart" height="140"></canvas>
+      </section>
+
+      <section class="card ngo">
+        <h2 id="ngoTitle">Impact for NGOs</h2>
+        <p id="ngoText">
+          This tool converts complex bioinformatics into clear, community-level insight. It helps NGOs
+          explain environmental health risks, prioritize interventions, and support UN Sustainable
+          Development Goal 3: Good Health and Well-being.
+        </p>
+      </section>
+    </main>
+
+    <script>
+      const labels = {
+        en: {
+          lang: "ES",
+          title: "Open-Source Gene Guard",
+          subtitle:
+            "A public dashboard for visualizing how environmental toxins can trigger DNA bit-flips.",
+          inputSectionTitle: "DNA Risk Input",
+          dnaLabel: "DNA Sequence",
+          toxinLabel: "Toxin Level (%)",
+          analyzeBtn: "Analyze Community Risk",
+          resultsTitle: "Live Results",
+          mutLabel: "8-oxoG Mutations",
+          healthLabel: "Community Health Score",
+          ngoTitle: "Impact for NGOs",
+          ngoText:
+            "This tool converts complex bioinformatics into clear, community-level insight. It helps NGOs explain environmental health risks, prioritize interventions, and support UN Sustainable Development Goal 3: Good Health and Well-being.",
+          chartLabel: "DNA Integrity",
+          errPrefix: "Error: ",
+        },
+        es: {
+          lang: "EN",
+          title: "Open-Source Gene Guard",
+          subtitle:
+            "Un panel publico para visualizar como las toxinas ambientales pueden provocar cambios en el ADN.",
+          inputSectionTitle: "Entrada de Riesgo de ADN",
+          dnaLabel: "Secuencia de ADN",
+          toxinLabel: "Nivel de Toxina (%)",
+          analyzeBtn: "Analizar Riesgo Comunitario",
+          resultsTitle: "Resultados en Vivo",
+          mutLabel: "Mutaciones 8-oxoG",
+          healthLabel: "Puntaje de Salud Comunitaria",
+          ngoTitle: "Impacto para ONGs",
+          ngoText:
+            "Esta herramienta convierte bioinformatica compleja en informacion clara para la comunidad. Ayuda a las ONGs a explicar riesgos ambientales de salud, priorizar intervenciones y apoyar el Objetivo de Desarrollo Sostenible 3 de la ONU: Salud y Bienestar.",
+          chartLabel: "Integridad del ADN",
+          errPrefix: "Error: ",
+        },
+      };
+
+      let currentLang = "en";
+      const form = document.getElementById("analyzeForm");
+      const toxinInput = document.getElementById("toxinInput");
+      const toxinValue = document.getElementById("toxinValue");
+      const errorBox = document.getElementById("errorBox");
+      const mutValue = document.getElementById("mutValue");
+      const healthValue = document.getElementById("healthValue");
+
+      const chartCtx = document.getElementById("integrityChart").getContext("2d");
+      const integrityChart = new Chart(chartCtx, {
+        type: "bar",
+        data: {
+          labels: ["DNA Integrity"],
+          datasets: [
+            {
+              label: labels[currentLang].chartLabel,
+              data: [0],
+              backgroundColor: ["#0057B8"],
+              borderRadius: 8,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100,
+            },
+          },
+          plugins: {
+            legend: { display: true },
+          },
+        },
+      });
+
+      function applyLanguage(lang) {
+        const t = labels[lang];
+        document.documentElement.lang = lang;
+        document.getElementById("langToggle").textContent = t.lang;
+        document.getElementById("title").textContent = t.title;
+        document.getElementById("subtitle").textContent = t.subtitle;
+        document.getElementById("inputSectionTitle").textContent = t.inputSectionTitle;
+        document.getElementById("dnaLabel").textContent = t.dnaLabel;
+        document.getElementById("toxinLabel").textContent = t.toxinLabel;
+        document.getElementById("analyzeBtn").textContent = t.analyzeBtn;
+        document.getElementById("resultsTitle").textContent = t.resultsTitle;
+        document.getElementById("mutLabel").textContent = t.mutLabel;
+        document.getElementById("healthLabel").textContent = t.healthLabel;
+        document.getElementById("ngoTitle").textContent = t.ngoTitle;
+        document.getElementById("ngoText").textContent = t.ngoText;
+        integrityChart.data.datasets[0].label = t.chartLabel;
+        integrityChart.update();
+      }
+
+      document.getElementById("langToggle").addEventListener("click", () => {
+        currentLang = currentLang === "en" ? "es" : "en";
+        applyLanguage(currentLang);
+      });
+
+      toxinInput.addEventListener("input", () => {
+        toxinValue.textContent = toxinInput.value;
+      });
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        errorBox.classList.add("hidden");
+
+        const payload = {
+          dna_sequence: document.getElementById("dnaInput").value,
+          toxin_level: Number(toxinInput.value),
+        };
+
+        try {
+          const response = await fetch("/analyze", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const data = await response.json();
+
+          if (!response.ok || !data.ok) {
+            throw new Error(data.error || "Request failed");
+          }
+
+          const result = data.result;
+          mutValue.textContent = result.oxo8g_mutations;
+          healthValue.textContent = `${result.community_health_score}/100`;
+          integrityChart.data.datasets[0].data = [result.dna_integrity];
+          integrityChart.update();
+        } catch (err) {
+          errorBox.textContent = labels[currentLang].errPrefix + err.message;
+          errorBox.classList.remove("hidden");
+        }
+      });
+    </script>
+  </body>
+</html>
