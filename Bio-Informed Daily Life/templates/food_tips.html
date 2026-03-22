@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food You Eat - Decoding Your Daily Biology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav class="nav-container">
+            <a href="/" class="home-link">Home</a>
+            <h1 class="page-title">Food You Eat</h1>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <section class="content-section">
+                <h2>Basic Food Science</h2>
+                <p>Enzyme activity drives ripening and spoilage. Fermentation can preserve food. Proper storage extends freshness.</p>
+                <h3>Storage Tips</h3>
+                <ul>
+                    <li>Keep fruits and veggies separate to slow ethylene production.</li>
+                    <li>Use airtight containers for leftovers.</li>
+                    <li>Freeze items to halt bacterial growth.</li>
+                </ul>
+                <p>Link to your Smart Pantry idea for automated monitoring.</p>
+            </section>
+            <section id="food-data" class="data-section">
+                <h3>Today's Tip</h3>
+                <p id="food-tip">Loading...</p>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Bio-Informed Daily Life. Empowering decisions through biology.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

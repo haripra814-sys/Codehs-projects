@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Body's Signals - Decoding Your Daily Biology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav class="nav-container">
+            <a href="/" class="home-link">Home</a>
+            <h1 class="page-title">Your Body's Signals</h1>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <section class="content-section">
+                <h2>Circadian Rhythm and Your Body</h2>
+                <p>Your body's internal clock regulates sleep, energy, and metabolism. Disruptions can lead to fatigue and health issues.</p>
+                <h3>Sleep Hygiene Tips</h3>
+                <ul>
+                    <li>Maintain consistent sleep schedules.</li>
+                    <li>Avoid screens before bed to preserve melatonin.</li>
+                    <li>Exercise regularly for better rhythm alignment.</li>
+                </ul>
+            </section>
+            <section id="body-data" class="data-section">
+                <h3>Current Bio State</h3>
+                <p id="body-state">Loading...</p>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Bio-Informed Daily Life. Empowering decisions through biology.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

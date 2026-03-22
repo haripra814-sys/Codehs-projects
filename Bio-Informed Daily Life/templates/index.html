@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decoding Your Daily Biology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav class="nav-container">
+            <h1 class="site-title">Decoding Your Daily Biology</h1>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h2>Decoding Your Daily Biology</h2>
+            <p>Make informed decisions with biology in everyday life.</p>
+        </section>
+        <section class="cards">
+            <div class="card" data-link="/air_quality">
+                <h3>Air You Breathe</h3>
+                <p>Insights from MQ-135 data on air quality.</p>
+            </div>
+            <div class="card" data-link="/food_tips">
+                <h3>Food You Eat</h3>
+                <p>Nutrition and spoilage tips.</p>
+            </div>
+            <div class="card" data-link="/body_signals">
+                <h3>Your Body's Signals</h3>
+                <p>Biometrics and circadian rhythm.</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Bio-Informed Daily Life. Empowering decisions through biology.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

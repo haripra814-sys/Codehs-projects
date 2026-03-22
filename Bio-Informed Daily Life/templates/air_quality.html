@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air You Breathe - Decoding Your Daily Biology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav class="nav-container">
+            <a href="/" class="home-link">Home</a>
+            <h1 class="page-title">Air You Breathe</h1>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <section class="content-section">
+                <h2>Understanding VOCs and Your Health</h2>
+                <p>Volatile Organic Compounds (VOCs) from your MQ-135 sensor can impact human DNA subtly. While not immediately alarming, prolonged exposure may affect cellular processes.</p>
+                <h3>Actionable Tips</h3>
+                <ul>
+                    <li>Open windows for fresh air circulation.</li>
+                    <li>Use exhaust fans in kitchens and bathrooms.</li>
+                    <li>Choose low-VOC products for cleaning and painting.</li>
+                </ul>
+            </section>
+            <section id="air-data" class="data-section">
+                <h3>Current Air Quality</h3>
+                <p id="air-status">Loading...</p>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Bio-Informed Daily Life. Empowering decisions through biology.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
