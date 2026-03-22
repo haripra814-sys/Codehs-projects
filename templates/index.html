@@ -1,34 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stanford Bioinformatics Hub</title>
-  <link rel="stylesheet" href="/static/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioCross-Alpha - Human-Animal Biological Health Analyzer</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Stanford Bioinformatics Learning Tool</h1>
-    <p>Interactive DNA/RNA calculator and resource portal for college bioinformatics students.</p>
+    <div class="container">
+        <header class="header">
+            <h1>BioCross-Alpha</h1>
+            <p>Advanced Computational Biology Platform for Cross-Species Health Analysis</p>
+        </header>
 
-    <nav>
-      <a href="/kmer">k-mer Counter</a>
-      <a href="/gc">GC Content</a>
-      <a href="/fasta">FASTA Analyzer</a>
-      <a href="/align">Sequence Alignment</a>
-      <a href="/motif">Motif Search</a>
-      <a href="/sessions">Saved Sessions</a>
-      <a href="/">Home</a>
-    </nav>
+        <main class="main-content">
+            <section class="input-section">
+                <div class="input-card">
+                    <h2>Sequence Input</h2>
+                    <form id="analysis-form">
+                        <div class="form-group">
+                            <label for="human-seq">Human Protein Sequence</label>
+                            <textarea id="human-seq" name="human_seq" placeholder="Enter human amino acid sequence (e.g., ACDEF...)" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="animal-type">Target Animal Species</label>
+                            <select id="animal-type" name="animal_type">
+                                <option value="canine">Canine</option>
+                                <option value="feline">Feline</option>
+                                <option value="avian">Avian</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="animal-seq">Animal Protein Sequence</label>
+                            <textarea id="animal-seq" name="animal_seq" placeholder="Enter animal amino acid sequence (e.g., ACDEF...)" required></textarea>
+                        </div>
+                        <button type="submit" class="analyze-btn">Analyze Sequences</button>
+                    </form>
+                </div>
+            </section>
 
-    <section>
-      <h2>Stanford Resources</h2>
-      <ul>
-        {% for r in resources %}
-          <li><a href="{{ r.url }}" target="_blank">{{ r.name }}</a></li>
-        {% endfor %}
-      </ul>
-    </section>
-  </div>
+            <section class="results-section">
+                <div class="results-card" id="results-panel">
+                    <h2>Analysis Results</h2>
+                    <div id="loader" class="loader" style="display: none;">
+                        <div class="dna-helix"></div>
+                        <p>Processing genomic data...</p>
+                    </div>
+                    <div id="results-content" style="display: none;">
+                        <!-- Results will be populated here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('analysis-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const humanSeq = document.getElementById('human-seq').value.trim();
+            const animalSeq = document.getElementById('animal-seq').value.trim();
+
+            if (!humanSeq || !animalSeq) {
+                alert('Please enter both sequences.');
+                return;
+            }
+
+            // Show loader
+            document.getElementById('loader').style.display = 'block';
+            document.getElementById('results-content').style.display = 'none';
+
+            try {
+                const response = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        human_seq: humanSeq,
+                        animal_seq: animalSeq
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    displayResults(data);
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            } catch (error) {
+                alert('Network error: ' + error.message);
+            } finally {
+                // Hide loader
+                document.getElementById('loader').style.display = 'none';
+            }
+        });
+
+        function displayResults(data) {
+            const content = document.getElementById('results-content');
+
+            let html = '';
+
+            if (data.alignment) {
+                html += `
+                    <div class="result-item">
+                        <h3>Sequence Alignment</h3>
+                        <p><strong>Score:</strong> ${data.alignment.score}</p>
+                        <p><strong>Human:</strong> ${data.alignment.seq1_aligned}</p>
+                        <p><strong>Animal:</strong> ${data.alignment.seq2_aligned}</p>
+                    </div>
+                `;
+            }
+
+            if (data.human_composition) {
+                html += `
+                    <div class="result-item">
+                        <h3>Human Sequence Composition</h3>
+                        ${data.human_composition.gc_content !== null ? `<p><strong>GC Content:</strong> ${data.human_composition.gc_content.toFixed(2)}%</p>` : ''}
+                        <p><strong>Molecular Weight:</strong> ${data.human_composition.molecular_weight.toFixed(2)} Da</p>
+                        ${data.human_composition.isoelectric_point ? `<p><strong>Isoelectric Point:</strong> ${data.human_composition.isoelectric_point.toFixed(2)}</p>` : ''}
+                    </div>
+                `;
+            }
+
+            if (data.animal_composition) {
+                html += `
+                    <div class="result-item">
+                        <h3>Animal Sequence Composition</h3>
+                        ${data.animal_composition.gc_content !== null ? `<p><strong>GC Content:</strong> ${data.animal_composition.gc_content.toFixed(2)}%</p>` : ''}
+                        <p><strong>Molecular Weight:</strong> ${data.animal_composition.molecular_weight.toFixed(2)} Da</p>
+                        ${data.animal_composition.isoelectric_point ? `<p><strong>Isoelectric Point:</strong> ${data.animal_composition.isoelectric_point.toFixed(2)}</p>` : ''}
+                    </div>
+                `;
+            }
+
+            if (data.zoonotic_risk) {
+                html += `
+                    <div class="result-item">
+                        <h3>Zoonotic Risk Assessment</h3>
+                        <p><strong>Risk Level:</strong> ${data.zoonotic_risk.risk_level}</p>
+                        <p><strong>pI Difference:</strong> ${data.zoonotic_risk.pi_difference.toFixed(2)}</p>
+                        <p>${data.zoonotic_risk.description}</p>
+                    </div>
+                `;
+            }
+
+            content.innerHTML = html;
+            content.style.display = 'block';
+        }
+    </script>
 </body>
 </html>

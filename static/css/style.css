@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap");
+body {
+  font-family: "JetBrains Mono", monospace;
+  background-color: #0a0f1e;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.header h1 {
+  font-size: 3rem;
+  color: #00ff41;
+  text-shadow: 0 0 20px #00ff41;
+  margin-bottom: 10px;
+}
+.header p {
+  font-size: 1.2rem;
+  color: #b0b0b0;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+@media (min-width: 768px) {
+  .main-content {
+    flex-direction: row;
+  }
+}
+
+.input-section {
+  flex: 1;
+}
+.input-section .input-card {
+  background: rgba(26, 31, 46, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+.input-section .input-card h2 {
+  color: #00d4ff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.input-section .input-card .form-group {
+  margin-bottom: 20px;
+}
+.input-section .input-card .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #ffffff;
+  font-weight: 700;
+}
+.input-section .input-card .form-group textarea, .input-section .input-card .form-group select {
+  width: 100%;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+}
+.input-section .input-card .form-group textarea:focus, .input-section .input-card .form-group select:focus {
+  outline: none;
+  border-color: #00d4ff;
+  box-shadow: 0 0 10px #00d4ff;
+}
+.input-section .input-card .form-group textarea {
+  min-height: 100px;
+}
+.input-section .input-card .analyze-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(45deg, #00ff41, #00d4ff);
+  border: none;
+  border-radius: 8px;
+  color: #0a0f1e;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.input-section .input-card .analyze-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 255, 65, 0.4);
+}
+.input-section .input-card .analyze-btn:active {
+  transform: translateY(0);
+}
+
+.results-section {
+  flex: 1;
+}
+.results-section .results-card {
+  background: rgba(26, 31, 46, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  min-height: 400px;
+}
+.results-section .results-card h2 {
+  color: #00d4ff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.results-section .results-card .result-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(0, 212, 255, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid #00d4ff;
+}
+.results-section .results-card .result-item h3 {
+  color: #00ff41;
+  margin-bottom: 10px;
+}
+.results-section .results-card .result-item p {
+  margin: 5px 0;
+  color: #ffffff;
+}
+
+.loader {
+  text-align: center;
+  padding: 40px;
+}
+.loader p {
+  color: #00d4ff;
+  margin-top: 20px;
+}
+
+.dna-helix {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+.dna-helix::before, .dna-helix::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #00ff41;
+  animation: helix 2s infinite ease-in-out;
+}
+.dna-helix::before {
+  top: 0;
+  left: 0;
+  animation-delay: 0s;
+}
+.dna-helix::after {
+  bottom: 0;
+  right: 0;
+  background: #00d4ff;
+  animation-delay: 1s;
+}
+.dna-helix .strand1,
+.dna-helix .strand2 {
+  position: absolute;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(to bottom, #00ff41, #00d4ff);
+  animation: pulse 1.5s infinite;
+}
+.dna-helix .strand1 {
+  left: 20px;
+  transform: rotate(15deg);
+}
+.dna-helix .strand2 {
+  right: 20px;
+  transform: rotate(-15deg);
+}
+
+@keyframes helix {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(60px);
+  }
+}
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@media (max-width: 767px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+  .input-card,
+  .results-card {
+    padding: 20px;
+  }
+  .main-content {
+    gap: 20px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
