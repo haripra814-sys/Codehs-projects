@@ -1,0 +1,7 @@
+# Requirements for PhyloShield DNA Analysis Platform
+# Core web framework for backend API
+flask==2.3.3
+# Bioinformatics library for sequence analysis
+biopython==1.81
+# Data manipulation library (for potential future extensions)
+pandas==2.0.3

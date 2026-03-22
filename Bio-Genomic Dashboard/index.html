@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhyloShield - DNA Analysis Platform</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="laboratory-container">
+        <!-- Header Section -->
+        <header class="lab-header">
+            <h1 class="platform-title">🧬 PhyloShield</h1>
+            <p class="platform-subtitle">Advanced DNA Analysis Platform for Comparative Genomics</p>
+        </header>
+
+        <!-- Main Analysis Interface -->
+        <main class="analysis-interface">
+            <div class="input-section">
+                <div class="sequence-input-card">
+                    <h2 class="card-title">Human DNA Sequence</h2>
+                    <textarea
+                        id="human-sequence"
+                        class="sequence-textarea"
+                        placeholder="Enter human DNA sequence (e.g., ATCGATCGATCG...)"
+                        rows="8"></textarea>
+                </div>
+
+                <div class="sequence-input-card">
+                    <h2 class="card-title">Animal DNA Sequence</h2>
+                    <textarea
+                        id="animal-sequence"
+                        class="sequence-textarea"
+                        placeholder="Enter animal DNA sequence (e.g., GCTAGCTAGCTA...)"
+                        rows="8"></textarea>
+                </div>
+
+                <div class="parameter-input-card">
+                    <h2 class="card-title">Environmental Parameters</h2>
+                    <div class="parameter-group">
+                        <label for="gas-level" class="parameter-label">
+                            MQ-135 Gas Level (ppm)
+                        </label>
+                        <input
+                            type="number"
+                            id="gas-level"
+                            class="parameter-input"
+                            placeholder="0.0"
+                            min="0"
+                            step="0.1"
+                            value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analysis Button -->
+            <div class="action-section">
+                <button id="analyze-btn" class="analyze-button">
+                    🔬 Analyze Sequences
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-section" class="results-section hidden">
+                <div class="results-grid">
+                    <!-- Sequence Identity Card -->
+                    <div class="result-card">
+                        <h3 class="result-title">Sequence Identity</h3>
+                        <div class="result-value" id="identity-value">--</div>
+                        <div class="result-unit">%</div>
+                        <div class="result-description" id="identity-category">Analysis pending</div>
+                    </div>
+
+                    <!-- GC Content Comparison -->
+                    <div class="result-card">
+                        <h3 class="result-title">GC Content</h3>
+                        <canvas id="gc-chart" width="300" height="200"></canvas>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color human"></span>
+                                Human: <span id="human-gc">--</span>%
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color animal"></span>
+                                Animal: <span id="animal-gc">--</span>%
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Health Risk Card -->
+                    <div class="result-card">
+                        <h3 class="result-title">Health Risk Assessment</h3>
+                        <div class="result-value" id="mutation-rate">--</div>
+                        <div class="result-unit">%</div>
+                        <div class="risk-level" id="risk-level">Unknown</div>
+                        <div class="result-description">
+                            Predicted mutation rate based on environmental gas levels
+                        </div>
+                    </div>
+
+                    <!-- Comparison Summary -->
+                    <div class="result-card">
+                        <h3 class="result-title">Comparative Analysis</h3>
+                        <div class="comparison-metrics">
+                            <div class="metric">
+                                <span class="metric-label">GC Difference:</span>
+                                <span class="metric-value" id="gc-difference">--</span>%
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Relationship:</span>
+                                <span class="metric-value" id="relationship">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Methodology Section -->
+        <section class="methodology-section">
+            <h2 class="section-title">🔬 Scientific Methodology</h2>
+
+            <div class="methodology-content">
+                <div class="methodology-card">
+                    <h3>Smith-Waterman Algorithm</h3>
+                    <p>
+                        The Smith-Waterman algorithm is a dynamic programming approach for performing
+                        local sequence alignment. Unlike global alignment methods that force alignment
+                        of entire sequences, Smith-Waterman identifies the most similar subsequences
+                        within longer sequences.
+                    </p>
+                    <div class="algorithm-formula">
+                        <strong>Scoring Matrix:</strong><br>
+                        H(i,j) = max {
+                            H(i-1,j-1) + s(aᵢ,bⱼ),  // Match/Mismatch
+                            H(i-1,j) + w,           // Gap in sequence b
+                            H(i,j-1) + w,           // Gap in sequence a
+                            0                       // No alignment
+                        }
+                    </div>
+                    <p>
+                        Where s(aᵢ,bⱼ) is the substitution score and w is the gap penalty.
+                        This algorithm is particularly valuable in bioinformatics for identifying
+                        conserved domains and motifs across evolutionary distant species.
+                    </p>
+                </div>
+
+                <div class="methodology-card">
+                    <h3>GC Content Analysis</h3>
+                    <p>
+                        GC content represents the percentage of guanine and cytosine nucleotides
+                        in a DNA sequence. This parameter is crucial for understanding DNA stability,
+                        melting temperature, and evolutionary patterns.
+                    </p>
+                    <div class="formula">
+                        GC% = (G + C) / (A + T + G + C) × 100
+                    </div>
+                    <p>
+                        Higher GC content correlates with increased thermal stability and is often
+                        associated with coding regions in eukaryotic genomes.
+                    </p>
+                </div>
+
+                <div class="methodology-card">
+                    <h3>Environmental Health Risk Modeling</h3>
+                    <p>
+                        Our health risk assessment integrates environmental monitoring data with
+                        genomic stability predictions. The MQ-135 gas sensor measures volatile
+                        organic compounds and air quality parameters.
+                    </p>
+                    <div class="formula">
+                        Mutation Rate = Baseline + (Gas Level × Sensitivity Factor)
+                    </div>
+                    <p>
+                        This model provides preliminary risk stratification for environmental
+                        impact on genetic material integrity.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="lab-footer">
+            <p>&copy; 2024 PhyloShield DNA Analysis Platform. Built for comparative genomics research.</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/static/script.js"></script>
+</body>
+</html>

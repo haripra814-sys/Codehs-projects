@@ -1,0 +1,503 @@
+/* PhyloShield Laboratory Dashboard Styles */
+/* ======================================== */
+
+/* SCSS Variables (CSS Custom Properties) */
+:root {
+  /* Color Palette */
+  --neon-green: #00ff88;
+  --neon-green-glow: #00ff88aa;
+  --deep-sea-blue: #001122;
+  --deep-sea-blue-light: #002244;
+  --dark-bg: #0a0a0a;
+  --darker-bg: #050505;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-muted: #888888;
+  --border-color: rgba(0, 255, 136, 0.3);
+  --glass-bg: rgba(0, 18, 34, 0.8);
+  --glass-border: rgba(0, 255, 136, 0.2);
+
+  /* Typography */
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-size-base: 16px;
+  --font-size-large: 24px;
+  --font-size-xl: 32px;
+
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 255, 136, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 255, 136, 0.2);
+  --shadow-lg: 0 8px 32px rgba(0, 255, 136, 0.3);
+  --shadow-glow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-mono);
+  background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Laboratory Container */
+.laboratory-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+/* Header Section */
+.lab-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.platform-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--neon-green);
+  text-shadow: var(--shadow-glow);
+  margin-bottom: var(--spacing-sm);
+}
+
+.platform-subtitle {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* Analysis Interface */
+.analysis-interface {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+/* Input Section */
+.input-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--spacing-md);
+}
+
+/* Glassmorphism Cards */
+.sequence-input-card,
+.parameter-input-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.sequence-input-card:hover,
+.parameter-input-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--neon-green-glow);
+  transform: translateY(-2px);
+}
+
+.card-title {
+  font-size: var(--font-size-large);
+  font-weight: 600;
+  color: var(--neon-green);
+  margin-bottom: var(--spacing-md);
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+/* Text Areas */
+.sequence-textarea {
+  width: 100%;
+  min-height: 120px;
+  background: rgba(0, 18, 34, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  resize: vertical;
+  transition: all 0.3s ease;
+}
+
+.sequence-textarea:focus {
+  outline: none;
+  border-color: var(--neon-green);
+  box-shadow: 0 0 0 2px rgba(0, 255, 136, 0.3);
+  background: rgba(0, 18, 34, 0.8);
+}
+
+/* Parameter Input */
+.parameter-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.parameter-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.parameter-input {
+  background: rgba(0, 18, 34, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.parameter-input:focus {
+  outline: none;
+  border-color: var(--neon-green);
+  box-shadow: 0 0 0 2px rgba(0, 255, 136, 0.3);
+}
+
+/* Action Section */
+.action-section {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-lg);
+}
+
+.analyze-button {
+  background: linear-gradient(135deg, var(--neon-green) 0%, var(--deep-sea-blue) 100%);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: var(--font-size-large);
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--dark-bg);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.analyze-button:hover {
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--deep-sea-blue) 0%, var(--neon-green) 100%);
+}
+
+.analyze-button:active {
+  transform: translateY(0);
+}
+
+/* Results Section */
+.results-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+}
+
+.results-section:not(.hidden) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+/* Result Cards */
+.result-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.result-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.result-title {
+  font-size: var(--font-size-large);
+  font-weight: 600;
+  color: var(--neon-green);
+  margin-bottom: var(--spacing-md);
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.result-value {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+  text-shadow: var(--shadow-glow);
+}
+
+.result-unit {
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.result-description {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.risk-level {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.risk-level[data-level="Low"] {
+  color: #00ff88;
+}
+
+.risk-level[data-level="Moderate"] {
+  color: #ffa500;
+}
+
+.risk-level[data-level="High"] {
+  color: #ff6b35;
+}
+
+.risk-level[data-level="Critical"] {
+  color: #ff0000;
+}
+
+/* Chart Styles */
+#gc-chart {
+  max-width: 100%;
+  margin: var(--spacing-md) 0;
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-md);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legend-color.human {
+  background: var(--neon-green);
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+}
+
+.legend-color.animal {
+  background: var(--deep-sea-blue-light);
+  box-shadow: 0 0 8px rgba(0, 34, 68, 0.6);
+}
+
+/* Comparison Metrics */
+.comparison-metrics {
+  text-align: left;
+  margin-top: var(--spacing-md);
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-xs) 0;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.metric:last-child {
+  border-bottom: none;
+}
+
+.metric-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.metric-value {
+  color: var(--neon-green);
+  font-weight: 600;
+}
+
+/* Methodology Section */
+.methodology-section {
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-xl) 0;
+  border-top: 1px solid var(--glass-border);
+}
+
+.section-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--neon-green);
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  text-shadow: var(--shadow-glow);
+}
+
+.methodology-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.methodology-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.methodology-card h3 {
+  font-size: var(--font-size-large);
+  font-weight: 600;
+  color: var(--neon-green);
+  margin-bottom: var(--spacing-md);
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.methodology-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+.algorithm-formula,
+.formula {
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--neon-green);
+  text-align: center;
+}
+
+/* Footer */
+.lab-footer {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  color: var(--text-muted);
+  font-size: 14px;
+  border-top: 1px solid var(--glass-border);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .laboratory-container {
+    padding: var(--spacing-md);
+  }
+
+  .input-section {
+    grid-template-columns: 1fr;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .methodology-content {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-title {
+    font-size: 28px;
+  }
+
+  .result-value {
+    font-size: 36px;
+  }
+
+  .analyze-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lab-header {
+    padding: var(--spacing-md);
+  }
+
+  .sequence-input-card,
+  .parameter-input-card,
+  .result-card,
+  .methodology-card {
+    padding: var(--spacing-md);
+  }
+
+  .chart-legend {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}
+
+/* Loading Animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Hidden Utility Class */
+.hidden {
+  display: none !important;
+}
