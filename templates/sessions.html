@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saved Sessions</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Saved Analysis Sessions</h1>
+    <nav><a href="/">Home</a> | <a href="/kmer">k-mer Counter</a> | <a href="/gc">GC Content</a> | <a href="/fasta">FASTA Analyzer</a> | <a href="/align">Sequence Alignment</a> | <a href="/motif">Motif Search</a></nav>
+
+    {% if data %}
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Tool</th>
+          <th>Input</th>
+          <th>Result</th>
+          <th>Timestamp</th>
+        </tr>
+        {% for row in data %}
+          <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td><small>{{ row[2] }}</small></td>
+            <td><small>{{ row[3] }}</small></td>
+            <td>{{ row[4] }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p>No sessions saved yet.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

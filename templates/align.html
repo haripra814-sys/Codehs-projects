@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sequence Alignment</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Sequence Alignment (Needleman-Wunsch)</h1>
+    <nav><a href="/">Home</a> | <a href="/kmer">k-mer Counter</a> | <a href="/gc">GC Content</a> | <a href="/fasta">FASTA Analyzer</a> | <a href="/motif">Motif Search</a> | <a href="/sessions">Saved Sessions</a></nav>
+
+    <form method="post">
+      <label>Sequence 1</label>
+      <textarea name="seq1" rows="3">{{ seq1 }}</textarea>
+      <label>Sequence 2</label>
+      <textarea name="seq2" rows="3">{{ seq2 }}</textarea>
+      <button type="submit">Align</button>
+    </form>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if result %}
+      <h2>Alignment Result</h2>
+      <p><strong>Score:</strong> {{ result.score }}</p>
+      <pre>{{ result.align1 }}</pre>
+      <pre>{{ result.align2 }}</pre>
+    {% endif %}
+  </div>
+</body>
+</html>

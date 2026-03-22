@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motif Search</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Motif Search</h1>
+    <nav><a href="/">Home</a> | <a href="/kmer">k-mer Counter</a> | <a href="/gc">GC Content</a> | <a href="/fasta">FASTA Analyzer</a> | <a href="/align">Sequence Alignment</a> | <a href="/sessions">Saved Sessions</a></nav>
+
+    <form method="post">
+      <label>Sequence</label>
+      <textarea name="sequence" rows="4">{{ seq }}</textarea>
+      <label>Motif</label>
+      <input type="text" name="motif" value="{{ motif }}" />
+      <button type="submit">Search</button>
+    </form>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if positions %}
+      <h2>Found at positions (1-based)</h2>
+      <ul>
+        {% for pos in positions %}
+          <li>{{ pos }}</li>
+        {% endfor %}
+      </ul>
+      {% if not positions %}
+        <p>No matches found.</p>
+      {% endif %}
+    {% endif %}
+  </div>
+</body>
+</html>

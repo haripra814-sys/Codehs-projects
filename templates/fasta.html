@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FASTA Analyzer</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>FASTA Analyzer</h1>
+    <nav><a href="/">Home</a> | <a href="/kmer">k-mer Counter</a> | <a href="/gc">GC Content</a></nav>
+
+    <form method="post">
+      <label>Paste FASTA data</label>
+      <textarea name="fasta_text" rows="12"></textarea>
+      <button type="submit">Analyze</button>
+    </form>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if data %}
+      <table>
+        <tr>
+          <th>Header</th>
+          <th>Length</th>
+          <th>GC%</th>
+          <th>Reverse Complement</th>
+          <th>Translation</th>
+        </tr>
+        {% for entry in data %}
+          <tr>
+            <td>{{ entry.header }}</td>
+            <td>{{ entry.length }}</td>
+            <td>{{ entry.gc }}%</td>
+            <td><small>{{ entry.rev_comp }}</small></td>
+            <td><small>{{ entry.translation }}</small></td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  </div>
+</body>
+</html>

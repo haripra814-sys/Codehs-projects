@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GC Content Calculator</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>GC Content Calculator</h1>
+    <nav><a href="/">Home</a> | <a href="/kmer">k-mer Counter</a></nav>
+
+    <form method="post">
+      <label>Sequence (DNA/RNA)</label>
+      <textarea name="sequence" rows="4">{{ seq }}</textarea>
+      <button type="submit">Calculate</button>
+    </form>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if gc_pct is not none %}
+      <p><strong>GC%</strong>: {{ gc_pct }}%</p>
+    {% endif %}
+  </div>
+</body>
+</html>

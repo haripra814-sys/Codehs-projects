@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>k-mer Counter</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>k-mer Counter</h1>
+    <nav><a href="/">Home</a> | <a href="/gc">GC Content</a></nav>
+
+    <form method="post">
+      <label>Sequence (DNA/RNA)</label>
+      <textarea name="sequence" rows="4"></textarea>
+      <label>k</label>
+      <input type="number" name="k" value="3" min="1" />
+      <button type="submit">Compute</button>
+    </form>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if result %}
+      <h2>Top k-mer counts</h2>
+      <table>
+        <tr><th>k-mer</th><th>count</th></tr>
+        {% for kmer, count in result.items()|sort(attribute='0') %}
+          <tr><td>{{ kmer }}</td><td>{{ count }}</td></tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  </div>
+</body>
+</html>
