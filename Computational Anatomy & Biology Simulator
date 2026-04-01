@@ -1,0 +1,21 @@
+# 🧬 Computational Anatomy & Biology Simulator
+**A 7th Grade Honors Project merging Python Programming with Biological Sciences.**
+
+## 🌟 Project Overview
+This repository contains a suite of Python-based simulations designed to model complex biological systems. By using **Object-Oriented Programming (OOP)**, this project simulates the structural and functional aspects of plant and human biology.
+
+My goal is to pursue a career in **Bio-Engineering** and explore the intersection of code and life sciences.
+
+## 🦴 Featured Module: Human Bone Structure
+The `bone_structure.py` script models the macroscopic and microscopic layers of human long bones. 
+
+### Key Features:
+* **Hierarchical Modeling:** Uses nested classes to represent the **Periosteum**, **Compact Bone**, and **Medullary Cavity**.
+* **Fracture Mechanics:** A logic-based function that calculates fracture risk based on bone density and external impact force ($F$).
+* **Data Validation:** Implements Python Type Hinting to ensure scientific data integrity.
+
+## 🚀 How to Run
+1. Ensure you have **Python 3.x** installed.
+2. Clone this repository:
+   ```bash
+   git clone [https://github.com/YOUR_USERNAME/bio-simulations.git](https://github.com/YOUR_USERNAME/bio-simulations.git)
