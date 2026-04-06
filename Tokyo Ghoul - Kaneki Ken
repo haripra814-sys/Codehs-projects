@@ -1,0 +1,175 @@
+HTML
+
+<div class="eye-zone">
+	<div class="eye-left">
+		<div class="iris"></div>
+		<div class="eye-in-shadow"></div>
+	</div>
+	<div class="eye-right">
+		<div class="iris"></div>
+		<div class="eye-in-shadow"></div>
+	</div>
+</div>
+
+<footer>
+	<p>カネキ ケン</p>
+	<p>Kaneki Ken</p>
+</footer>
+
+
+CSS
+
+body {
+	background: #EFE6E2;
+}
+.eye-zone {
+	margin-top: 30vh;
+	margin-left: auto;
+	margin-right: auto;
+	width: 600px;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	.eye {
+		
+		&-left,
+		&-right {
+			width: 15em;
+			height: 5.3em;
+			margin: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+			border-radius: 0px;
+			
+			.iris {
+				width: 80px;
+				height: 80px;
+				border-radius: 60px;
+			}
+			
+		}
+		
+		&-left {
+			background: #93A1A2;
+			border-radius:2px 99% 2px 99%;
+			margin-right: 175px;
+			transform: rotate(-8deg);
+			box-shadow: -10px 0px 0px 0px #272825, -6px -9px 0px 5.5px #272825, 0px 0px 0 10px #efe6e2, -1px 3px 0 8px #000, -9px 0px 0 17px #efe6e2, -18px 5px 0 8px #000, -9px 0px 0 25px #efe6e2, -6px 8px 0 18px #000;
+			
+			.iris {
+				margin-left: 38px;
+    		margin-top: -42px;
+				background: #9E9B92;
+				display:flex;
+				justify-content: center;
+				align-items: center;
+				box-shadow: 2px 2px 0px 0px #272825, 1px -3px 0px 2px #272825, inset -5px 46px 0 6px #2C3134;
+				
+				&::before {
+					content: "";
+					position: relative;
+					height: 20px;
+					width: 12px;
+					background: white;
+					border-radius: 50px;
+					transform: rotate(52deg);
+					top: 22px;
+					left: -22px;
+				}
+				
+				&::after {
+					content: "";
+					position: relative;
+					height: 8px;
+					width: 8px;
+					margin-top: 18px;
+					background: black;
+					border-radius: 50%;
+					box-shadow: 0 0 0 9px #2c3134;
+				}
+			}
+			
+			.eye-in-shadow {
+					border-radius: 5px 98% 3px 92%;
+					height: 58px;
+					width: 123px;
+					background: white;
+					position: absolute;
+					bottom: 1px;
+					transform: rotate(-4deg);
+					left: 20px;
+					z-index: -1;
+				}
+		}
+		
+		&-right {
+			border-radius:99% 2px 97% 2px;
+			transform: rotate(8deg);
+			background: #272825;
+			box-shadow: 10px 0px 0px 0px #272825, 6px -9px 0px 5.5px #272825, -2px -2px 0 11px #efe6e2, -1px 3px 0 8px #000, -5px 8px 0 14px #efe6e2, -8px 15px 0 9px #000, -9px 0px 0 29px #efe6e2, 1px 8px 0 18px #000;
+			
+			.iris {
+				margin-right: 41px;
+				margin-top: -34px;
+				background: #F40730;
+				box-shadow: 0 0 3px 3px #551415;
+				display:flex;
+				justify-content: center;
+				align-items: center;
+				
+				&:before {
+					content: "";
+					border-radius: 50%;
+					height: 20px;
+					width: 20px;
+					background: #540208;
+					box-shadow: 0px 0px 8px 1px #540208, 0px 0px 3px 7px #B30314, 0px 0px 7px 13px #f40730, 0px 0px 11px 21px #B30314, 6px 1px 11px 21px #B30314;
+					
+				}
+				
+				&:after {
+					content: "";
+					border-radius: 100%;
+					height: 5px;
+					width: 27px;
+					position: absolute;
+					transform: rotate(-15deg);
+					background: white;
+					top: 26px;
+					left: 103px;
+					box-shadow: 9px 0px 0px 1.1px #fff, 10px 0px 11px 5px #f40730;
+				}
+			}
+			
+			.eye-in-shadow {
+					border-radius: 98% 1px 100% 5px;
+					height: 58px;
+					width: 123px;
+					background: rgba(68, 64, 65, 0.73);
+					position: absolute;
+					bottom: -3px;
+					transform: rotate(4deg);
+					left: 17px;
+					z-index: -1;
+				}
+		}		
+	}
+}
+
+footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 70px;
+	
+	p {
+		margin: 0;
+		color: rgba(0,0,0,0.54);
+		line-height: 24px;
+	}
+}
