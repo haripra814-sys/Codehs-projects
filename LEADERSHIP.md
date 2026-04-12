@@ -1,6 +1,6 @@
 The Synapse of Service: A Roadmap to Biotechnology and Leadership
 
-By Pranav Krishna Harinath
+By Pra
 
 Introduction
 In the world of biology, a synapse is a bridge that allows a signal to pass from one neuron to the next, creating action and thought. I view the Five Pillars of the National Junior Honor Society—Scholarship, Service, Leadership, Character, and Citizenship—as the essential synapses of a purposeful life. As a seventh-grade developer and aspiring biotechnologist, I don’t see these pillars as separate requirements, but as an integrated operating system for making a tangible impact on the world.
