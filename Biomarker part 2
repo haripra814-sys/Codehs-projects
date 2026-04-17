@@ -1,0 +1,49 @@
+{
+  "name": "NutritionLog",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "omega3": {
+      "type": "number",
+      "description": "Omega-3 intake (g)"
+    },
+    "vitamin_d_supplement": {
+      "type": "number",
+      "description": "Vitamin D supplement (IU)"
+    },
+    "refined_sugar": {
+      "type": "number",
+      "description": "Refined sugar (g)"
+    },
+    "protein": {
+      "type": "number",
+      "description": "Protein (g)"
+    },
+    "fiber": {
+      "type": "number",
+      "description": "Fiber (g)"
+    },
+    "calories": {
+      "type": "number",
+      "description": "Total calories (kcal)"
+    },
+    "fasting_hours": {
+      "type": "number",
+      "description": "Daily fasting window (hours)"
+    },
+    "antioxidants": {
+      "type": "number",
+      "description": "Antioxidant score (1-10)"
+    },
+    "alcohol_units": {
+      "type": "number",
+      "description": "Alcohol (units)"
+    }
+  },
+  "required": [
+    "date"
+  ]
+}
