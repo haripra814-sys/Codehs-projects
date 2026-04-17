@@ -1,0 +1,63 @@
+{
+  "name": "BioMarker",
+  "type": "object",
+  "properties": {
+    "crp": {
+      "type": "number",
+      "description": "C-Reactive Protein (mg/L)"
+    },
+    "glucose": {
+      "type": "number",
+      "description": "Fasting Glucose (mg/dL)"
+    },
+    "hba1c": {
+      "type": "number",
+      "description": "HbA1c (%)"
+    },
+    "vitamin_d": {
+      "type": "number",
+      "description": "Vitamin D (ng/mL)"
+    },
+    "homocysteine": {
+      "type": "number",
+      "description": "Homocysteine (\u00b5mol/L)"
+    },
+    "hdl": {
+      "type": "number",
+      "description": "HDL Cholesterol (mg/dL)"
+    },
+    "ldl": {
+      "type": "number",
+      "description": "LDL Cholesterol (mg/dL)"
+    },
+    "triglycerides": {
+      "type": "number",
+      "description": "Triglycerides (mg/dL)"
+    },
+    "age": {
+      "type": "number",
+      "description": "Chronological Age"
+    },
+    "sex": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female"
+      ],
+      "description": "Biological Sex"
+    },
+    "bio_age": {
+      "type": "number",
+      "description": "Calculated Biological Age"
+    },
+    "chi_score": {
+      "type": "number",
+      "description": "Cellular Health Index (0-100)"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional notes"
+    }
+  },
+  "required": []
+}
