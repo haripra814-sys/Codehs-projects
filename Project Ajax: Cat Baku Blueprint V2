@@ -1,0 +1,47 @@
+Project Ajax: Cat Baku Blueprint & Technical Specifications V2
+Design Version: 2.0 (Full Body Integration)
+Project Name: Ajax
+Objective: To design a high-performance, quadruped robotic companion inspired by the "Baku" technology described in Jinxed, now featuring full anatomical structural details.
+1. Full Body Structural Anatomy
+The following table outlines every major physical component required for a complete Cat Baku build.
+Body Part
+Mechanical Components
+Functionality
+Chassis (Torso)
+Main 120x70mm plate, internal battery cage, brain mount.
+Central structural hub housing the ESP32 and LiPo battery.
+Head & Neck
+Pan-tilt servo assembly, ultrasonic sensor eyes, speaker/mic.
+Houses the primary sensors for object avoidance and voice recognition.
+Forelimbs (Front Legs)
+Shoulder servo, elbow servo, upper and lower leg shafts.
+Provides precision steering and forward propulsion.
+Hindlimbs (Back Legs)
+Hip servo, knee servo, tension springs.
+Responsible for power, jumping, and "pouncing" force.
+Tail
+Single-axis servo, flexible cable or carbon rod.
+Assists with dynamic balance during fast turns and expresses emotion.
+Outer Shell (Skin)
+Removable aerodynamic casing (3D printed).
+Protects internals and provides the cat-like aesthetic.
+
+2. Electronics & "The Brain"
+Microcontroller: ESP32 (Dual-core) for motor control and AI processing.
+Power: 7.4V LiPo Battery with 5V/3A Voltage Regulator.
+Actuators: 10x Total Servos (4x Shoulders, 4x Knees, 1x Neck, 1x Tail).
+Sensors: Ultrasonic "Eyes," I2S Microphone (Hearing), and IMU (Balance).
+3. Software Architecture
+void loop() {
+  maintainBalance();   // Continuous IMU feedback
+  checkSensors();      // Scan for obstacles or commands
+  processBehaviors();  // Handle Idle, Walk, or Play states
+}
+
+
+4. Assembly Instructions
+Mount Servos: Install the 4 shoulder servos into the chassis corners.
+Build Legs: Attach upper limbs to shoulder servos, then lower limbs to elbow/knee servos.
+Head Assembly: Mount the pan-tilt neck to the front of the chassis.
+Wiring: Route all 10 servo cables to the central ESP32 expansion board.
+Shelling: Snap on the outer body panels to complete the "Baku" look.
