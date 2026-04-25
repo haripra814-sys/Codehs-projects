@@ -1,0 +1,47 @@
+Project Ajax: Component List & Estimated Cost Analysis
+Project Name: Ajax (Cat Baku)
+Build Level: Intermediate / High-Performance
+Currency: USD (Estimated)
+This list covers the internal "Skeletons" and "Brains" required to bring Ajax to life. Prices are based on average 2026 market rates for hobbyist robotics components.
+1. Core Electronics (The Brain & Power)
+Item
+Description
+Est. Cost
+Microcontroller
+ESP32 DevKit V1 (Dual-Core with Bluetooth/Wi-Fi)
+$8.00
+Servo Driver
+PCA9685 16-Channel 12-bit PWM Driver
+$6.00
+Battery
+7.4V 2S LiPo Battery (approx. 1000-1500mAh)
+$15.00
+Voltage Regulator
+Buck Converter (Step-down to 5V/3A)
+$5.00
+
+2. Actuators (The Muscles)
+Item
+Quantity
+Est. Cost
+MG90S Servos
+10 (8 for legs, 1 neck, 1 tail)
+$35.00
+
+3. Sensors (The Senses)
+Item
+Description
+Est. Cost
+Ultrasonic Sensor
+HC-SR04 (The "Eyes")
+$3.00
+IMU Sensor
+MPU-6050 (6-axis Gyro/Accel for balance)
+$4.00
+
+4. Structural & Miscellaneous
+3D Printing Filament: PLA+ or PETG (approx. 500g) - $12.00
+Fasteners: M3 Screw & Nut Assortment - $10.00
+Wiring: Jumper wires and breadboard/PCB - $5.00
+Total Estimated Build Cost: $103.00
+Note: This cost does not include the price of a 3D printer or specialized tools like a soldering iron. Prices may vary based on your location and chosen supplier.
