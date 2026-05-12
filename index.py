@@ -1,59 +1,54 @@
-import RPi.GPIO as GPIO
+import abc
 import time
-import math
 
-# --- Configuration ---
-LEFT_WING_PIN = 18
-RIGHT_WING_PIN = 19
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(LEFT_WING_PIN, GPIO.OUT)
-GPIO.setup(RIGHT_WING_PIN, GPIO.OUT)
+# --- The Strategy Interface (The Abstract Plan) ---
+class ActionStrategy(abc.ABC):
+    """Defines a family of logical responses."""
+    @abc.abstractmethod
+    def execute(self, data: dict) -> str:
+        pass
 
-# Initialize PWM at 50Hz (Standard for Servos)
-left_pwm = GPIO.PWM(LEFT_WING_PIN, 50)
-right_pwm = GPIO.PWM(RIGHT_WING_PIN, 50)
-left_pwm.start(0)
-right_pwm.start(0)
+# --- Concrete Strategies (The Master's Options) ---
+class MinimumEffort(ActionStrategy):
+    """Ayanokoji's default state: Win with the least movement possible."""
+    def execute(self, data: dict) -> str:
+        return f"[LOGIC] Threshold met. Deploying minimum necessary intervention for {data['target']}."
 
-def set_angle(pwm, angle, invert=False):
-    """Translates 0-180 degrees into duty cycle"""
-    if invert:
-        angle = 180 - angle
-    duty = angle / 18 + 2
-    pwm.ChangeDutyCycle(duty)
+class SystemicOverhaul(ActionStrategy):
+    """Used only when the 'game' requires a total change of the board."""
+    def execute(self, data: dict) -> str:
+        return f"[LOGIC] Tactical necessity detected. Rewriting system parameters for {data['target']}."
 
-def butterfly_mimic(duration_sec, speed=1.0):
-    """
-    speed: higher is faster flapping
-    """
-    start_time = time.time()
+class DefensiveShadow(ActionStrategy):
+    """Obscure the true intent while maintaining control."""
+    def execute(self, data: dict) -> str:
+        return f"[LOGIC] Redirecting attention. Controlling outcome from the periphery."
+
+# --- The Context (The 'White Room' Logic Controller) ---
+class Strategist:
+    def __init__(self, initial_strategy: ActionStrategy):
+        self._strategy = initial_strategy
+
+    def set_strategy(self, new_strategy: ActionStrategy):
+        print(f"[SYSTEM] Switching to {new_strategy.__class__.__name__}...")
+        self._strategy = new_strategy
+
+    def process_scenario(self, scenario: dict):
+        # Ayanokoji-style analysis: Calculating the path of least resistance
+        print(f"--- Analyzing Scenario: {scenario['id']} ---")
+        time.sleep(0.5)  # Processing time
+        result = self._strategy.execute(scenario)
+        print(result)
+
+# --- Execution ---
+if __name__ == "__main__":
+    # Initialize with Minimum Effort (Standard Ayanokoji)
+    kiyotaka = Strategist(MinimumEffort())
     
-    print("Butterfly robot active...")
+    current_scenario = {"id": "Class D Conflict", "target": "Horikita"}
+    kiyotaka.process_scenario(current_scenario)
     
-    while time.time() - start_time < duration_sec:
-        t = time.time() * speed
-        
-        # Use a Sine wave to create fluid motion
-        # Butterflies have a 'clapping' motion: 0 to 90 degrees
-        flap_angle = (math.sin(t * 5) + 1) * 45 
-        
-        # Add a slight 'shiver' or 'tremble' common in butterflies
-        tremble = math.sin(t * 20) * 2
-        
-        # Sync wings
-        set_angle(left_pwm, flap_angle + tremble)
-        set_angle(right_pwm, flap_angle + tremble, invert=True)
-        
-        time.sleep(0.02) # High frequency updates for smoothness
-
-try:
-    # Mimic for 30 seconds at a natural pace
-    butterfly_mimic(30, speed=1.5)
-
-except KeyboardInterrupt:
-    print("Butterfly resting.")
-
-finally:
-    left_pwm.stop()
-    right_pwm.stop()
-    GPIO.cleanup()
+    # Change strategy based on shifting variables
+    print("\n[ALERT] Variable Change: Interference from Class A detected.")
+    kiyotaka.set_strategy(DefensiveShadow())
+    kiyotaka.process_scenario(current_scenario)
