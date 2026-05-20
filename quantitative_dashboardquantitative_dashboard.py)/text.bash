@@ -1,0 +1,4 @@
+pip install reflex
+mkdir quantitative_dashboard
+cd quantitative_dashboard
+reflex init
