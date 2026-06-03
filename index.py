@@ -1,54 +1,27 @@
-import abc
-import time
+class ThermalSystem:
+    """Models the physical transfer of thermal energy across a localized vector."""
+    def __init__(self, initial_temperatures: list):
+        self.nodes = initial_temperatures
+        self.k_factor = 0.25  # Thermal conductivity constant
 
-# --- The Strategy Interface (The Abstract Plan) ---
-class ActionStrategy(abc.ABC):
-    """Defines a family of logical responses."""
-    @abc.abstractmethod
-    def execute(self, data: dict) -> str:
-        pass
+    def simulate_conduction_step(self):
+        """Applies the laws of thermodynamics to distribute energy evenly."""
+        next_state = self.nodes.copy()
+        # Calculate energy transfer between adjacent physical nodes
+        for i in range(1, len(self.nodes) - 1):
+            heat_flux = self.k_factor * (self.nodes[i-1] - 2*self.nodes[i] + self.nodes[i+1])
+            next_state[i] += heat_flux
+        self.nodes = next_state
 
-# --- Concrete Strategies (The Master's Options) ---
-class MinimumEffort(ActionStrategy):
-    """Ayanokoji's default state: Win with the least movement possible."""
-    def execute(self, data: dict) -> str:
-        return f"[LOGIC] Threshold met. Deploying minimum necessary intervention for {data['target']}."
+    def display_energy_profile(self, step: int):
+        profile = " | ".join(f"{temp:.1f}°C" for temp in self.nodes)
+        return f"Step {step:02d} -> [ {profile} ]"
 
-class SystemicOverhaul(ActionStrategy):
-    """Used only when the 'game' requires a total change of the board."""
-    def execute(self, data: dict) -> str:
-        return f"[LOGIC] Tactical necessity detected. Rewriting system parameters for {data['target']}."
+# --- Run the Physical Simulation ---
+# A system with a high-heat center node radiating outwards
+metal_rod = ThermalSystem(initial_temperatures=[20.0, 20.0, 100.0, 20.0, 20.0])
 
-class DefensiveShadow(ActionStrategy):
-    """Obscure the true intent while maintaining control."""
-    def execute(self, data: dict) -> str:
-        return f"[LOGIC] Redirecting attention. Controlling outcome from the periphery."
-
-# --- The Context (The 'White Room' Logic Controller) ---
-class Strategist:
-    def __init__(self, initial_strategy: ActionStrategy):
-        self._strategy = initial_strategy
-
-    def set_strategy(self, new_strategy: ActionStrategy):
-        print(f"[SYSTEM] Switching to {new_strategy.__class__.__name__}...")
-        self._strategy = new_strategy
-
-    def process_scenario(self, scenario: dict):
-        # Ayanokoji-style analysis: Calculating the path of least resistance
-        print(f"--- Analyzing Scenario: {scenario['id']} ---")
-        time.sleep(0.5)  # Processing time
-        result = self._strategy.execute(scenario)
-        print(result)
-
-# --- Execution ---
-if __name__ == "__main__":
-    # Initialize with Minimum Effort (Standard Ayanokoji)
-    kiyotaka = Strategist(MinimumEffort())
-    
-    current_scenario = {"id": "Class D Conflict", "target": "Horikita"}
-    kiyotaka.process_scenario(current_scenario)
-    
-    # Change strategy based on shifting variables
-    print("\n[ALERT] Variable Change: Interference from Class A detected.")
-    kiyotaka.set_strategy(DefensiveShadow())
-    kiyotaka.process_scenario(current_scenario)
+print("--- Initializing Thermodynamic Conduction Simulation ---")
+for step in range(1, 6):
+    metal_rod.simulate_conduction_step()
+    print(metal_rod.display_energy_profile(step))
