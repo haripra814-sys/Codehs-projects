@@ -1,0 +1,54 @@
+# quantitative_dashboard/macro_allocator.py
+
+def calculate_macro_split(weight_kg: float, total_calories: int, goal: str) -> dict:
+    """
+    Computes a precise metabolic macro split based on weight, 
+    daily caloric targets, and athletic objectives.
+    
+    Goals supported: 'Lean Bulk', 'Targeted Cut', 'Recomp'
+    """
+    # 1. Establish the baseline Protein target (2.2g per kg of body mass)
+    protein_grams = weight_kg * 2.2
+    protein_calories = protein_grams * 4
+    
+    # Check if protein calories exceed total allowance
+    if protein_calories >= total_calories:
+        return {"Error": "Caloric ceiling too low for baseline protein requirement."}
+
+    # 2. Establish Lipid target (Normalized to a safe 25% of total energy requirement)
+    fat_calories = total_calories * 0.25
+    fat_grams = fat_calories / 9
+
+    # 3. Solve for Carbohydrates dynamically using the remaining energy balance
+    remaining_calories = total_calories - (protein_calories + fat_calories)
+    
+    # 4. Apply strategic goal modifiers to balance the remaining carbohydrates
+    if goal == "Lean Bulk":
+        # Add a slight metabolic surplus buffer
+        remaining_calories += 200 
+    elif goal == "Targeted Cut":
+        # Introduce a minor energy restriction filter
+        remaining_calories -= 200
+
+    carb_grams = max(0, remaining_calories / 4)
+    
+    # Return the structured data payload
+    return {
+        "Calorie Target": total_calories,
+        "Protein (g)": round(protein_grams, 1),
+        "Carbohydrates (g)": round(carb_grams, 1),
+        "Fats (g)": round(fat_grams, 1),
+        "Strategic Mode": goal
+    }
+
+if __name__ == "__main__":
+    # Test case: 70kg athlete aiming for a 2500 calorie Recomp profile
+    test_weight = 70.0
+    test_calories = 2500
+    test_goal = "Recomp"
+    
+    results = calculate_macro_split(test_weight, test_calories, test_goal)
+    
+    print("=== UI DASHBOARD BACKEND TELEMETRY ===")
+    for metric, value in results.items():
+        print(f"{metric}: {value}")
