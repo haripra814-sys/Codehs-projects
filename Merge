@@ -1,0 +1,48 @@
+import os
+import shutil
+from pathlib import Path
+
+def migrate_project_files(old_repo_path: str, new_repo_path: str, targets: list):
+    """
+    Copies targeted files or directories from the old repository to the new repository.
+    """
+    old_base = Path(old_repo_path)
+    new_base = Path(new_repo_path)
+    
+    if not old_base.exists():
+        print(f"[-] Error: Old repository path does not exist: {old_base}")
+        return
+
+    for target in targets:
+        source = old_base / target
+        destination = new_base / target
+        
+        if source.exists():
+            # Create destination parent folders if they don't exist
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            
+            if source.is_dir():
+                # Remove destination directory if it already exists to avoid merge conflicts
+                if destination.exists():
+                    shutil.rmtree(destination)
+                shutil.copytree(source, destination)
+                print(f"[+] Successfully migrated directory: {target}")
+            else:
+                shutil.copy2(source, destination)
+                print(f"[+] Successfully migrated file: {target}")
+        else:
+            print(f"[!] Warning: Target not found in old repo: {target}")
+
+if __name__ == "__main__":
+    # Define your local system paths
+    OLD_REPO = "./path_to_old_repository"
+    NEW_REPO = "./path_to_new_repository"
+    
+    # List the specific files/folders you want to transfer
+    FILES_TO_MIGRATE = [
+        "src/services/base44Service.ts",
+        "src/utils/geoUtils.ts",
+        "src/data/friscoBackgroundData.ts"
+    ]
+    
+    migrate_project_files(OLD_REPO, NEW_REPO, FILES_TO_MIGRATE)
