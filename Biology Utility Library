@@ -1,0 +1,39 @@
+"""
+Biotech & Computational Biology Utility Library
+Simulates DNA transcription, RNA translation, and basic point mutations.
+"""
+
+class BioinformaticsModel:
+    # Standard RNA Codon to Amino Acid mapping (simplified)
+    CODON_TABLE = {
+        'UUU': 'Phe', 'UUC': 'Phe', 'UUA': 'Leu', 'UUG': 'Leu',
+        'UCU': 'Ser', 'UCC': 'Ser', 'UCA': 'Ser', 'UCG': 'Ser',
+        'UAU': 'Tyr', 'UAC': 'Tyr', 'UAA': 'STOP', 'UAG': 'STOP',
+        'UGU': 'Cys', 'UGC': 'Cys', 'UGA': 'STOP', 'UGG': 'Trp',
+        'CUU': 'Leu', 'CUC': 'Leu', 'CUA': 'Leu', 'CUG': 'Leu',
+        'CCU': 'Pro', 'CCC': 'Pro', 'CCA': 'Pro', 'CCG': 'Pro',
+        'CAU': 'His', 'CAC': 'His', 'CAA': 'Gln', 'CAG': 'Gln',
+        'CGU': 'Arg', 'CGC': 'Arg', 'CGA': 'Arg', 'CGG': 'Arg',
+        'AUU': 'Ile', 'AUC': 'Ile', 'AUA': 'Ile', 'AUG': 'Met',  # AUG is also START
+        'ACU': 'Thr', 'ACC': 'Thr', 'ACA': 'Thr', 'ACG': 'Thr',
+        'AAU': 'Asn', 'AAC': 'Asn', 'AAA': 'Lys', 'AAG': 'Lys',
+        'AGU': 'Ser', 'AGC': 'Ser', 'AGA': 'Arg', 'AGG': 'Arg',
+        'GUU': 'Val', 'GUC': 'Val', 'GUA': 'Val', 'GUG': 'Val',
+        'GCU': 'Ala', 'GCC': 'Ala', 'GCA': 'Ala', 'GCG': 'Ala',
+        'GAU': 'Asp', 'GAC': 'Asp', 'GAA': 'Glu', 'GAG': 'Glu',
+        'GGU': 'Gly', 'GGC': 'Gly', 'GGA': 'Gly', 'GGG': 'Gly'
+    }
+
+    def transcribe_dna_to_rna(self, dna_sequence: str) -> str:
+        """
+        Transcribes a DNA sequence into an RNA sequence (swaps Thymine 'T' for Uracil 'U').
+        """
+        clean_dna = dna_sequence.upper().strip()
+        # Simple validation
+        if not all(nucleotide in "ATCG" for nucleotide in clean_dna):
+            raise ValueError("Invalid DNA sequence. Only A, T, C, and G are allowed.")
+        return clean_dna.replace('T', 'U')
+
+    def translate_rna_to_protein(self, rna_sequence: str) -> list:
+        """
+        Translates an RNA sequence into a sequence of
