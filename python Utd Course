@@ -1,0 +1,68 @@
+# Function to calculate square
+def square(n):
+    return n ** 2
+
+# Global variable
+FAVORITE_NUMBER = 7
+
+def main():
+    # Call and print the square function
+    print(f"The square of 11 is {square(11)}")
+    
+    # Access and print the FAVORITE_NUMBER variable
+    print(f"Favorite number is {FAVORITE_NUMBER}")
+
+    # Improvement needed on the greeting function to accept a name parameter
+    def greeting(name):
+        print("Hello, " + name)
+
+    greeting("Jonathan")
+
+    # Define a dictionary to store person information
+    person1 = {
+        "name": "John",
+        "age": 36,
+        "country": "Norway"
+    }
+
+    # Access and print the age of the person
+    print(f"Age of {person1['name']} is {person1['age']}")
+
+# improvements needed to call the main function when the script is executed directly
+
+def main():
+    # Call and print the square function
+    print(f"The square of 11 is {square(11)}")
+    
+    # Access and print the FAVORITE_NUMBER variable
+    print(f"Favorite number is {FAVORITE_NUMBER}")
+
+    # Improvement needed on the greeting function to accept a name parameter
+    def greeting(name):
+        print("Hello, " + name)
+
+    greeting("Jonathan")
+
+    # Define a dictionary to store person information
+    person1 = {
+        "name": "John",
+        "age": 36,
+        "country": "Norway"
+    }
+
+    # Access and print the age of the person
+    print(f"Age of {person1['name']} is {person1['age']}")
+
+    if globals().get("__name__") == "__main__":
+        main()
+
+  # what is the purpose of the if statement at the end of the code? Answer: The purpose of the `if __name__ == "__main__":` statement at the end of the code is to ensure that the `main()` function is only executed when the script is run directly, rather than when it is imported as a module in another script.
+
+ 
+    print("This script is being imported as a module and will not execute the main function.")
+
+    # for example, if you import this script into another Python file, the code inside the `main()` function will not run automatically. This allows for better modularity and reusability of the code.
+
+
+if __name__ == "__main__":
+    main()
